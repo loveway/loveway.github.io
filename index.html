@@ -1,466 +1,295 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="学习总结 思考感悟 知识管理 人生感悟">
-    <meta name="keyword" content="undefined">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="HenryCheng" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        undefined
-        
-    </title>
+  <meta charset="utf-8">
+  
+  <title>HenryCheng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学习总结 思考感悟 知识管理 人生感悟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HenryCheng">
+<meta property="og:url" content="https://www.clearloveway.com/index.html">
+<meta property="og:site_name" content="HenryCheng">
+<meta property="og:description" content="学习总结 思考感悟 知识管理 人生感悟">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HenryCheng">
+<meta name="twitter:description" content="学习总结 思考感悟 知识管理 人生感悟">
+  
+    <link rel="alternate" href="/atom.xml" title="HenryCheng" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
 
-    <link rel="canonical" href="https://www.clearloveway.com/">
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
-
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
 </head>
 
-<style>
-
-    header.intro-header {
-        background-image: url('undefined')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "true" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    HenryCheng
-                </span>
-                's Blog
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-
-<style>
-
-    .custom-haojen-container .post-preview:nth-of-type(1),
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        text-align: center;
-        background-repeat: no-repeat;
-        border-radius: 3px;
-        background-size: cover;
-        padding: 0;
-        height: 300px;
-        display: table;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
-    }
-
-    /*去掉诗歌的背景图片*/
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        background-image: none !important;
-        background-color: rgba(255, 248, 220, 0.5);
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) h2,
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
-    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
-        letter-spacing: 1px;
-        color: #fff;
-        margin-top: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
-        font-size: .9em;
-        font-weight: 300;
-        margin-top: 0;
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
-        letter-spacing: 6px;
-        font-size: 18px;
-        font-family: unset;
-        font-weight: 400;
-        color: rgba(0, 0, 0, .75)
-    }
-
-    /*不显示摘要*/
-    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
-        display: none
-    }
-
-    /*只第一个显示背景图片*/
-    .custom-haojen-container .post-preview:not(:nth-child(1)) {
-        background-image: none !important;
-    }
-
-    /*第一个分界线去掉*/
-    .custom-haojen-container hr:nth-of-type(1) {
-        display: none;
-    }
-
-    /*主题*/
-    .custom-haojen-container .post-preview:nth-of-type(1) > a {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    /*诗词标题*/
-    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-        font-size: 35px;
-        font-family: STKaiti;
-        color: rgba(0, 0, 0, .8);
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
-        color: #0e2231;
-    }
-
-    @media (max-width: 768px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 240px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 28px !important;
-            margin-top: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-of-type(1) > a {
-            padding: 20px
-        }
-    }
-
-    /*手机屏幕*/
-    @media (max-width: 400px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 195px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 20px !important;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 16px;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) a {
-            padding: 30px 20px;
-        }
-    }
-</style>
-
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src="undefined"/>
-                        <h5><a href="/about/">HenryCheng</a></h5>
-                        <p>undefined</p>
-                    </div>
-                </div>
-            </div>
-        </header>
-    </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2017/06/06/heo--ll/">
-        <h2 class="post-title">
-            恩恩额
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HenryCheng</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不知何处雨，已觉此间凉</a>
         </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-06-06
-        </p>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-        <div class="post-content-preview">
-            <p>
-                一、为什么要重载运算符
-我们都知道所谓的运算符平常的也就是 + - * / 之类的，比如我们随便写个 1 + 2 打印肯定输出的是 3 ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体123456struct Vector &#123;        var x: Int..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2017/06/06/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-06-06
-        </p>
+          <a class="main-nav-link" href="/">Home</a>
         
-        <div class="post-content-preview">
-            <p>
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer i..
-            </p>
-        </div>
-    </a>
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.clearloveway.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-heo--ll" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/06/heo--ll/" class="article-date">
+  <time datetime="2017-06-06T11:01:04.000Z" itemprop="datePublished">2017-06-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/打/">打</a>
+  </div>
 
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
+  </div>
+  <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/06/heo--ll/">恩恩额</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、为什么要重载运算符"><a href="#一、为什么要重载运算符" class="headerlink" title="一、为什么要重载运算符"></a>一、为什么要重载运算符</h4><hr>
+<p>我们都知道所谓的运算符平常的也就是 <code>+ - * /</code> 之类的，比如我们随便写个 <code>1 + 2</code> 打印肯定输出的是 <code>3</code> ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct Vector &#123;</div><div class="line">    </div><div class="line">    var x: Int = 0</div><div class="line">    var y: Int = 0</div><div class="line">    var z: Int = 0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后我们定义两个变量 V1，V2<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var V1 = Vector(x: 1, y: 2, z: 3)</div><div class="line">var V2 = Vector(x: 4, y: 5, z: 6)</div></pre></td></tr></table></figure></p>
+<p>然后我们来写<code>V1 + V2</code>，报错</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-ed690fe1f87cda52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" error "><br>报错 <code>+</code> 不能用于 <code>Vector</code>，这是因为 <code>Vector</code> 是我们自定义的一个结构体，所以编译器不知道我们要用 <code>+</code> 对这个结构体做什么操作。因此，在这里我们就需要用到运算符的重载。</p>
+<p>####二、如何重载运算符</p>
+<hr>
+<ul>
+<li>1、含有两个参数的运算符的重载<br>因为运算符是一个函数，比如对于数组的 <code>reduce</code>方法我们就可以如下<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> arr = [1, 2, 3, 4]</div><div class="line">arr.reduce(0, +)</div></pre></td></tr></table></figure>
+</li>
 </ul>
+<p>结果是 10 ，这里的 <code>+</code>就代表了一个函数，所以我们重新写的时候可以如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">func + (left: Vector, right: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    return Vector(x: left.x + right.x, y: left.y + right.y, z: left.z + right.z)</div><div class="line">&#125;</div><div class="line">``` bash</div><div class="line">这样我们就实现了 `+` 的重载，上面函数中 left 和 right 两个参数都是 Vector 类型的，一个表示运算符左边的参数一个表示运算符右边的参数（这两个参数是有先后顺序的，由于加法满足加法交换律所以这里体现不出来，有兴趣的可以试一下 `-` 的重载，这时候就要注意顺序了），然后返回值得类型也是 Vector 类型，再来实现`V1 + V2`的时候，就发现得到了一个新的 Vector 类型的值</div><div class="line"></div><div class="line">![V1 + V2](http://upload-images.jianshu.io/upload_images/571495-7743fd3f2d5a3a4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div><div class="line">这里我们就已经完成了 `+` 这个运算符的重载。当然有兴趣的童鞋还可以试着自己实现 `-` 或者 `*` 的重载，这里就不一一举例了。</div><div class="line">关于双目运算符的重载，和单目运算符类似，如下</div><div class="line">``` bash</div><div class="line">func  += (left: inout Vector, right: Vector) &#123;</div><div class="line">    </div><div class="line">   left = left + right</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果<br><img src="http://upload-images.jianshu.io/upload_images/571495-407bf897c0229ca7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="V1"></p>
+<ul>
+<li>2、含有一个参数的运算符的重载<br>照着上面单目运算符的方式我们自己来写个 <code>-</code> 重载例子，如下<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func - (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> Vector(x: -vector.x, y: -vector.y, z: -vector.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>按照我们的逻辑这里取反逻辑上应该是正确的，可是编译会发现报错</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-5e066ede422ddd2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这里我们就要注意了，和有两个参数的运算符不同的是，只有一个参数的运算符位置是不固定的，这里的 <code>-</code> 可以在前可以在后，所以我们在这里还需要注意运算符的位置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">prefix func - (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> Vector(x: -vector.x, y: -vector.y, z: -vector.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里加上一个 prefix 表示前置（后置是 postfix）。这样就可以明确运算符的位置</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-40e8c6d074f5ebea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="-V1"></p>
+<ul>
+<li>3 、比较运算符的重载<br>关于比较运算符的重载，顾名思义也是有两个参数的，返回值肯定是个 <code>Bool</code> 类型的，如下重载 <code>==</code> 运算符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func == (left: Vector, right: Vector) -&gt; Bool &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> left.x == right.x &amp;&amp; left.y == right.y &amp;&amp; left.z == right.z</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-2d71c68a6b38af31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" V1 与 V2 的比较"><br>再来看看 <code>&gt;</code> 的重载，逻辑稍微多一点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">func &gt; (left: Vector, right: Vector) -&gt; Bool &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> left.x != right.x &#123; <span class="built_in">return</span> left.x &gt; right.x &#125;</div><div class="line">    <span class="keyword">if</span> left.y != right.y &#123; <span class="built_in">return</span> left.y &gt; right.y &#125;</div><div class="line">    <span class="keyword">if</span> left.z != right.z &#123; <span class="built_in">return</span> left.z &gt; right.z &#125;</div><div class="line">    //如果上面判断都失败了说明 left == right，所以返回值应该是 <span class="literal">false</span></div><div class="line">    <span class="built_in">return</span> <span class="literal">false</span></div><div class="line">&#125;</div><div class="line">``` </div><div class="line"></div><div class="line">此时再去比较 V1 和 V2 就会出现你逻辑中的效果。常规的运算符就说到这里，下面我们来看一下自定义运算符的重载。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#### 三、自定义运算符的重载</span></div><div class="line"></div><div class="line">上面我们所说的都是 Swift 中已经存在了的运算符，那么我们能不能自己定义运算符呢？答案是肯定的，在文档中我们可以看到这么一句话</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">Custom operators can begin with one of the ASCII characters /, =, -, +, !, *, %, &lt;, &gt;, &amp;, |, ^, ?, or ~, or one of the Unicode characters defined <span class="keyword">in</span> the grammar below </div><div class="line">(<span class="built_in">which</span> include characters from the *Mathematical Operators*, *Miscellaneous Symbols*, and *Dingbats* Unicode blocks, among others).</div><div class="line">After the first character, combining Unicode characters are also allowed.</div><div class="line"></div><div class="line"></div><div class="line">意思就是</div><div class="line"></div><div class="line">自定义运算符可以由以下其中之一的 ASCII 字符 /、=、 -、+、!、*、%、&lt;、&gt;、&amp;、|、^、?</div><div class="line"> 以及~，或者后面语法中规定的任一个 Unicode 字符</div><div class="line">（其中包含了*数学运算符*、*零散符号(Miscellaneous Symbols)* 以及印刷符号 (Dingbats) 之类的 Unicode 块）开始。在第一个字符之后，允许使用组合型 Unicode 字符。</div><div class="line"></div><div class="line">* 1、自定义单目运算符</div><div class="line">所以我们在自定义运算符的时候要注意一下。下面我们就来简单的自定义一个单目运算符 `+++`，这个运算符的作用呢就是让 Vector 中的每个变量都加 1 ，如下</div><div class="line">``` bash</div><div class="line">prefix func +++ (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> Vector(x: vector.x + 1, y: vector.y + 1, z: vector.z + 1)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是编译的时候会报错，如下<br><img src="http://upload-images.jianshu.io/upload_images/571495-508132cfcf9a52a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这是因为我们没有明确的定义这个 <code>+++</code>，所以编译器不识别。所以我们应该申明一下这个运算符，正确的代码如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">prefix operator +++</div><div class="line">prefix func +++ (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> Vector(x: vector.x + 1, y: vector.y + 1, z: vector.z + 1)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在前面我们用 <code>prefix operator +++</code> 声明前置运算符 +++ ，这样后面就可以用了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var V3 = Vector(x: 1, y: 1, z: 1)</div><div class="line">prefix operator +++</div><div class="line">prefix func +++ (vector: Vector) -&gt; Vector &#123;</div><div class="line">    <span class="built_in">return</span> Vector(x: vector.x + 1, y: vector.y + 1, z: vector.z + 1)</div><div class="line">&#125;</div><div class="line">V3+++</div></pre></td></tr></table></figure></p>
+<p>如上输出结果就是 Vector(x: 2, y: 2, z: 2)，到此，单目运算符的自定义就完成了。</p>
+<ul>
+<li>2、自定义双目运算符<br>双目运算符的定义和单目运算符的定义类似，但是双目运算符自定义的时候的关键字是 <code>infix</code>，如下<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">infix operator ** </div><div class="line">func ** (x: Double, y: Double) -&gt; Double &#123;</div><div class="line">    <span class="built_in">return</span> pow(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面我们就自定义了一个求平方的双目运算符 <code>**</code>，然后我们试试 <code>2 ** 2</code>就可以看到结果是 <code>4.0</code>。<br>上面好像没有什么问题了，下面我想算一个平方的平方，拨入 2 的 2次方的 3 次方，照着逻辑应该这样写<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2 ** 2 ** 3</div></pre></td></tr></table></figure></p>
+<p>但是编译我们会发现报错，如下<br><img src="http://upload-images.jianshu.io/upload_images/571495-b2e1e315590d0634.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>错误是说我们上面的运算是个非结合性的运算，所谓的结合性（associativity）就是运算的先后顺序，在 Swift 2 中我们都知道还有个优先级（precedence），默认的是 100 ，它的范围是 0~200 ，这个是用来设置运算符优先级的，比如在swift 2.2 中我们完全定义一个求平方运算符就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">infix operator ** &#123; associativity left precedence 120 &#125;</div><div class="line">func ** (x: Double, y: Double) -&gt; Double &#123;</div><div class="line">    </div><div class="line">    return pow(x, y)</div><div class="line">&#125;</div><div class="line">2 ** 2 ** 3  //结果是64.0</div></pre></td></tr></table></figure></p>
+<p>在 Swift 3 中有些变化，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">precedencegroup ComparativePrecedence &#123;</div><div class="line">    associativity: right</div><div class="line">    higherThan: LogicalConjunctionPrecedence</div><div class="line">&#125;</div><div class="line">infix operator ** : ComparativePrecedence</div><div class="line">func ** (x: Double, y: Double) -&gt; Double &#123;</div><div class="line">    </div><div class="line">    return pow(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如上我们输入 <code>2 ** 2 ** 3</code>，就会发现结果是 256.0，这是因为我们把 associativity 设置成为了 right，所以运算从右边开始，先算 <code>2 ** 3 = 8.0</code>，然后再是 <code>2 ** 8.0 = 256.0</code>，如果我们把 associativity 设置成为了 left，就会发现结果是 64.0。关于更多的 associativity 和 higherThan 或者 lowerThan 之类的可以在下方参考连接中参考，这里就不一一说明了。<br>差不多运算符重载就到这里了，如果还有什么遗漏，欢迎大家指正！</p>
+<blockquote>
+<p>参考：<br>1、<a href="https://github.com/apple/swift-evolution/blob/master/proposals/0077-operator-precedence.md" target="_blank" rel="external">swift-evolution</a><br>2、<a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/swift/grammar/operator-declaration" target="_blank" rel="external">Operator Declaration</a></p>
+</blockquote>
 
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
-                    
-                    <h5><a href="/about/">HenryCheng</a></h5>
-                    
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        
-
-                        
-
-                        
-
-                        
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
-            
-
-            
-
-        </div>
+      
     </div>
-</div>
+    <footer class="article-footer">
+      <a data-url="https://www.clearloveway.com/2017/06/06/heo--ll/" data-id="cj3mnwwlh0001uwetdghg2oal" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/1/">1</a></li></ul>
 
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
+    </footer>
+  </div>
+  
+</article>
 
-                
 
-                
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/06/hello-world/" class="article-date">
+  <time datetime="2017-06-06T07:49:32.000Z" itemprop="datePublished">2017-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/06/hello-world/">Hello World</a>
+    </h1>
+  
 
-                
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; HenryCheng 2017
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="https://www.clearloveway.com/2017/06/06/hello-world/" data-id="cj3mnwwlb0000uwetj69h12rt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/打/">打</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/1/">1</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/1/" style="font-size: 10px;">1</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/06/heo--ll/">恩恩额</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/06/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 HenryCheng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/blog.js"></script>
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://www.clearloveway.com/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Google Analytics -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-<!-- Baidu Tongji -->
 
+<script src="/js/script.js"></script>
 
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','undefined','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="undefined">
+  </div>
 </body>
-
 </html>
