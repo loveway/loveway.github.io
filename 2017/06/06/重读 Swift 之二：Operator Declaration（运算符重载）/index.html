@@ -93,13 +93,13 @@
 
 
 
-<meta name="description" content="为什么要重载运算符 我们都知道所谓的运算符平常的也就是 + - * / 之类的，比如我们随便写个 1 + 2 打印肯定输出的是 3 ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体 123456struct Vector &amp;#123;        var x: Int = 0    var y: Int = 0    var z: Int = 0&amp;#125;">
+<meta name="description" content="为什么要重载运算符我们都知道所谓的运算符平常的也就是 + - * / 之类的，比如我们随便写个 1 + 2 打印肯定输出的是 3 ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体">
 <meta name="keywords" content="运算符重载,swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重读 Swift 之二：Operator Declaration（运算符重载）">
 <meta property="og:url" content="https://clearloveway.com/2017/06/06/重读 Swift 之二：Operator Declaration（运算符重载）/index.html">
-<meta property="og:site_name" content="HenryCheng">
-<meta property="og:description" content="为什么要重载运算符 我们都知道所谓的运算符平常的也就是 + - * / 之类的，比如我们随便写个 1 + 2 打印肯定输出的是 3 ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体 123456struct Vector &amp;#123;        var x: Int = 0    var y: Int = 0    var z: Int = 0&amp;#125;">
+<meta property="og:site_name" content="知是故人来">
+<meta property="og:description" content="为什么要重载运算符我们都知道所谓的运算符平常的也就是 + - * / 之类的，比如我们随便写个 1 + 2 打印肯定输出的是 3 ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-ed690fe1f87cda52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-7743fd3f2d5a3a4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-407bf897c0229ca7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -108,10 +108,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-2d71c68a6b38af31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-508132cfcf9a52a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-b2e1e315590d0634.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-06-08T10:51:07.000Z">
+<meta property="og:updated_time" content="2017-06-08T14:22:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重读 Swift 之二：Operator Declaration（运算符重载）">
-<meta name="twitter:description" content="为什么要重载运算符 我们都知道所谓的运算符平常的也就是 + - * / 之类的，比如我们随便写个 1 + 2 打印肯定输出的是 3 ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体 123456struct Vector &amp;#123;        var x: Int = 0    var y: Int = 0    var z: Int = 0&amp;#125;">
+<meta name="twitter:description" content="为什么要重载运算符我们都知道所谓的运算符平常的也就是 + - * / 之类的，比如我们随便写个 1 + 2 打印肯定输出的是 3 ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/571495-ed690fe1f87cda52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -121,7 +121,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -146,7 +146,7 @@
 
 
 
-  <title>重读 Swift 之二：Operator Declaration（运算符重载） | HenryCheng</title>
+  <title>重读 Swift 之二：Operator Declaration（运算符重载） | 知是故人来</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -172,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -183,12 +183,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">HenryCheng</span>
+        <span class="site-title">知是故人来</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">不知何处雨，已觉此间凉</p>
+        <p class="site-subtitle">那时我们有梦，关于文学，关于爱情，关于穿越世界的旅行  如今我们深夜饮酒，杯子碰到一起，都是梦破碎的声音。</p>
       
   </div>
 
@@ -285,7 +285,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HenryCheng">
+      <meta itemprop="name" content="知是故人来">
     </span>
 
     
@@ -361,35 +361,31 @@
       
 
       
-        <h2 id="为什么要重载运算符"><a href="#为什么要重载运算符" class="headerlink" title="为什么要重载运算符"></a>为什么要重载运算符</h2><hr>
-<p>我们都知道所谓的运算符平常的也就是 <code>+ - * /</code> 之类的，比如我们随便写个 <code>1 + 2</code> 打印肯定输出的是 <code>3</code> ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct Vector &#123;</div><div class="line">    </div><div class="line">    var x: Int = 0</div><div class="line">    var y: Int = 0</div><div class="line">    var z: Int = 0</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
+        <h2 id="为什么要重载运算符"><a href="#为什么要重载运算符" class="headerlink" title="为什么要重载运算符"></a>为什么要重载运算符</h2><p>我们都知道所谓的运算符平常的也就是 <code>+ - * /</code> 之类的，比如我们随便写个 <code>1 + 2</code> 打印肯定输出的是 <code>3</code> ，那么我们为什么还要重载运算符呢？下面我们就举个例子，如下我定义个结构体<a id="more"></a></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vector</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> x: <span class="type">Int</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> y: <span class="type">Int</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">var</span> z: <span class="type">Int</span> = <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们定义两个变量 V1，V2</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var V1 = Vector(x: 1, y: 2, z: 3)</div><div class="line">var V2 = Vector(x: 4, y: 5, z: 6)</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="type">V1</span> = <span class="type">Vector</span>(x: <span class="number">1</span>, y: <span class="number">2</span>, z: <span class="number">3</span>)</div><div class="line"><span class="keyword">var</span> <span class="type">V2</span> = <span class="type">Vector</span>(x: <span class="number">4</span>, y: <span class="number">5</span>, z: <span class="number">6</span>)</div></pre></td></tr></table></figure>
 <p>然后我们来写<code>V1 + V2</code>，报错</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/571495-ed690fe1f87cda52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" error "><br>报错 <code>+</code> 不能用于 <code>Vector</code>，这是因为 <code>Vector</code> 是我们自定义的一个结构体，所以编译器不知道我们要用 <code>+</code> 对这个结构体做什么操作。因此，在这里我们就需要用到运算符的重载。</p>
-<h2 id="如何重载运算符"><a href="#如何重载运算符" class="headerlink" title="如何重载运算符"></a>如何重载运算符</h2><hr>
-<h3 id="1、含有两个参数的运算符的重载"><a href="#1、含有两个参数的运算符的重载" class="headerlink" title="1、含有两个参数的运算符的重载"></a>1、含有两个参数的运算符的重载</h3><p>因为运算符是一个函数，比如对于数组的 <code>reduce</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let arr = [1, 2, 3, 4]</div><div class="line">arr.reduce(0, +)</div></pre></td></tr></table></figure>
+<h2 id="如何重载运算符"><a href="#如何重载运算符" class="headerlink" title="如何重载运算符"></a>如何重载运算符</h2><h3 id="含有两个参数的运算符的重载"><a href="#含有两个参数的运算符的重载" class="headerlink" title="含有两个参数的运算符的重载"></a>含有两个参数的运算符的重载</h3><p>因为运算符是一个函数，比如对于数组的 <code>reduce</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">arr.<span class="built_in">reduce</span>(<span class="number">0</span>, +)</div></pre></td></tr></table></figure>
 <p>结果是 10 ，这里的 <code>+</code> 就代表了一个函数，所以我们重新写的时候可以如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func + (left: Vector, right: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    return Vector(x: left.x + right.x, y: left.y + right.y, z: left.z + right.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> + <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Vector</span>(x: <span class="keyword">left</span>.x + <span class="keyword">right</span>.x, y: <span class="keyword">left</span>.y + <span class="keyword">right</span>.y, z: <span class="keyword">left</span>.z + <span class="keyword">right</span>.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样我们就实现了 <code>+</code> 的重载，上面函数中 left 和 right 两个参数都是 Vector 类型的，一个表示运算符左边的参数一个表示运算符右边的参数（这两个参数是有先后顺序的，由于加法满足加法交换律所以这里体现不出来，有兴趣的可以试一下 <code>-</code> 的重载，这时候就要注意顺序了），然后返回值得类型也是 Vector 类型，再来实现<code>V1 + V2</code>的时候，就发现得到了一个新的 Vector 类型的值</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/571495-7743fd3f2d5a3a4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="V1 + V2"></p>
-<p>这里我们就已经完成了 <code>+</code> 这个运算符的重载。当然有兴趣的童鞋还可以试着自己实现 <code>-</code> 或者 <code>*</code> 的重载，这里就不一一举例了。<br>关于双目运算符的重载，和单目运算符类似，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func  += (left: inout Vector, right: Vector) &#123;</div><div class="line">    </div><div class="line">   left = left + right</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里我们就已经完成了 <code>+</code> 这个运算符的重载。当然有兴趣的童鞋还可以试着自己实现 <code>-</code> 或者 <code>*</code> 的重载，这里就不一一举例了。<br>关于双目运算符的重载，和单目运算符类似，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span>  += <span class="params">(<span class="keyword">left</span>: <span class="keyword">inout</span> Vector, <span class="keyword">right</span>: Vector)</span></span> &#123;</div><div class="line">    </div><div class="line">   <span class="keyword">left</span> = <span class="keyword">left</span> + <span class="keyword">right</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>运行结果<br><img src="http://upload-images.jianshu.io/upload_images/571495-407bf897c0229ca7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="V1"></p>
-<h3 id="2、含有一个参数的运算符的重载"><a href="#2、含有一个参数的运算符的重载" class="headerlink" title="2、含有一个参数的运算符的重载"></a>2、含有一个参数的运算符的重载</h3><p>照着上面单目运算符的方式我们自己来写个 <code>-</code> 重载例子，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func - (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    return Vector(x: -vector.x, y: -vector.y, z: -vector.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="含有一个参数的运算符的重载"><a href="#含有一个参数的运算符的重载" class="headerlink" title="含有一个参数的运算符的重载"></a>含有一个参数的运算符的重载</h3><p>照着上面单目运算符的方式我们自己来写个 <code>-</code> 重载例子，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> - <span class="params">(vector: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Vector</span>(x: -vector.x, y: -vector.y, z: -vector.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>按照我们的逻辑这里取反逻辑上应该是正确的，可是编译会发现报错</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/571495-5e066ede422ddd2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这里我们就要注意了，和有两个参数的运算符不同的是，只有一个参数的运算符位置是不固定的，这里的 <code>-</code> 可以在前可以在后，所以我们在这里还需要注意运算符的位置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">prefix func - (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> Vector(x: -vector.x, y: -vector.y, z: -vector.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-5e066ede422ddd2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这里我们就要注意了，和有两个参数的运算符不同的是，只有一个参数的运算符位置是不固定的，这里的 <code>-</code> 可以在前可以在后，所以我们在这里还需要注意运算符的位置<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">prefix</span> <span class="function"><span class="keyword">func</span> - <span class="params">(vector: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Vector</span>(x: -vector.x, y: -vector.y, z: -vector.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这里加上一个 prefix 表示前置（后置是 postfix）。这样就可以明确运算符的位置</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/571495-40e8c6d074f5ebea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="-V1"></p>
-<h3 id="3-、比较运算符的重载"><a href="#3-、比较运算符的重载" class="headerlink" title="3 、比较运算符的重载"></a>3 、比较运算符的重载</h3><p>关于比较运算符的重载，顾名思义也是有两个参数的，返回值肯定是个 <code>Bool</code> 类型的，如下重载 <code>==</code> 运算符</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func == (left: Vector, right: Vector) -&gt; Bool &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> left.x == right.x &amp;&amp; left.y == right.y &amp;&amp; left.z == right.z</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="比较运算符的重载"><a href="#比较运算符的重载" class="headerlink" title="比较运算符的重载"></a>比较运算符的重载</h3><p>关于比较运算符的重载，顾名思义也是有两个参数的，返回值肯定是个 <code>Bool</code> 类型的，如下重载 <code>==</code> 运算符</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> == <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="keyword">left</span>.x == <span class="keyword">right</span>.x &amp;&amp; <span class="keyword">left</span>.y == <span class="keyword">right</span>.y &amp;&amp; <span class="keyword">left</span>.z == <span class="keyword">right</span>.z</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><img src="http://upload-images.jianshu.io/upload_images/571495-2d71c68a6b38af31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" V1 与 V2 的比较"><br>再来看看 <code>&gt;</code> 的重载，逻辑稍微多一点</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func &gt; (left: Vector, right: Vector) -&gt; Bool &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> left.x != right.x &#123; <span class="built_in">return</span> left.x &gt; right.x &#125;</div><div class="line">    <span class="keyword">if</span> left.y != right.y &#123; <span class="built_in">return</span> left.y &gt; right.y &#125;</div><div class="line">    <span class="keyword">if</span> left.z != right.z &#123; <span class="built_in">return</span> left.z &gt; right.z &#125;</div><div class="line">    //如果上面判断都失败了说明 left == right，所以返回值应该是 <span class="literal">false</span></div><div class="line">    <span class="built_in">return</span> <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> &gt; <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> <span class="keyword">left</span>.x != <span class="keyword">right</span>.x &#123; <span class="keyword">return</span> <span class="keyword">left</span>.x &gt; <span class="keyword">right</span>.x &#125;</div><div class="line">    <span class="keyword">if</span> <span class="keyword">left</span>.y != <span class="keyword">right</span>.y &#123; <span class="keyword">return</span> <span class="keyword">left</span>.y &gt; <span class="keyword">right</span>.y &#125;</div><div class="line">    <span class="keyword">if</span> <span class="keyword">left</span>.z != <span class="keyword">right</span>.z &#123; <span class="keyword">return</span> <span class="keyword">left</span>.z &gt; <span class="keyword">right</span>.z &#125;</div><div class="line">    <span class="comment">//如果上面判断都失败了说明 left == right，所以返回值应该是 false</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>此时再去比较 V1 和 V2 就会出现你逻辑中的效果。常规的运算符就说到这里，下面我们来看一下自定义运算符的重载。</p>
-<h2 id="自定义运算符的重载"><a href="#自定义运算符的重载" class="headerlink" title="自定义运算符的重载"></a>自定义运算符的重载</h2><hr>
-<p>上面我们所说的都是 Swift 中已经存在了的运算符，那么我们能不能自己定义运算符呢？答案是肯定的，在文档中我们可以看到这么一句话</p>
+<h2 id="自定义运算符的重载"><a href="#自定义运算符的重载" class="headerlink" title="自定义运算符的重载"></a>自定义运算符的重载</h2><p>上面我们所说的都是 Swift 中已经存在了的运算符，那么我们能不能自己定义运算符呢？答案是肯定的，在文档中我们可以看到这么一句话</p>
 <blockquote>
 <p>Custom operators can begin with one of the ASCII characters <code>/, =, -, +, !, *, %, &lt;, &gt;, &amp;, |, ^, ?</code> , or ~, or one of the Unicode characters defined in the grammar below (which include characters from the <em>Mathematical Operators</em>, <em>Miscellaneous Symbols</em>, and <em>Dingbats</em> Unicode blocks, among others).<br>After the first character, combining Unicode characters are also allowed.</p>
 </blockquote>
@@ -397,14 +393,14 @@
 <blockquote>
 <p>自定义运算符可以由以下其中之一的 ASCII 字符<code>/、=、 -、+、!、*、%、&lt;、&gt;、&amp;、|、^、?</code>以及 <code>~</code> ，或者后面语法中规定的任一个 Unicode 字符（其中包含了<em>数学运算符</em>、<em>零散符号(Miscellaneous Symbols)</em> 以及印刷符号 Dingbats 之类的 Unicode 块）开始。<br>在第一个字符之后，允许使用组合型 Unicode 字符。</p>
 </blockquote>
-<h4 id="1、自定义单目运算符"><a href="#1、自定义单目运算符" class="headerlink" title="1、自定义单目运算符"></a>1、自定义单目运算符</h4><p>所以我们在自定义运算符的时候要注意一下。下面我们就来简单的自定义一个单目运算符 <code>+++</code>，这个运算符的作用呢就是让 Vector 中的每个变量都加 1 ，如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">prefix func +++ (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> Vector(x: vector.x + 1, y: vector.y + 1, z: vector.z + 1)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>但是编译的时候会报错，如下<br><img src="http://upload-images.jianshu.io/upload_images/571495-508132cfcf9a52a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这是因为我们没有明确的定义这个 <code>+++</code>，所以编译器不识别。所以我们应该申明一下这个运算符，正确的代码如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">prefix operator +++</div><div class="line">prefix func +++ (vector: Vector) -&gt; Vector &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> Vector(x: vector.x + 1, y: vector.y + 1, z: vector.z + 1)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在前面我们用 <code>prefix operator +++</code> 声明前置运算符 +++ ，这样后面就可以用了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var V3 = Vector(x: 1, y: 1, z: 1)</div><div class="line">prefix operator +++</div><div class="line">prefix func +++ (vector: Vector) -&gt; Vector &#123;</div><div class="line">    <span class="built_in">return</span> Vector(x: vector.x + 1, y: vector.y + 1, z: vector.z + 1)</div><div class="line">&#125;</div><div class="line">V3+++</div></pre></td></tr></table></figure></p>
+<h3 id="自定义单目运算符"><a href="#自定义单目运算符" class="headerlink" title="自定义单目运算符"></a>自定义单目运算符</h3><p>所以我们在自定义运算符的时候要注意一下。下面我们就来简单的自定义一个单目运算符 <code>+++</code>，这个运算符的作用呢就是让 Vector 中的每个变量都加 1 ，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">prefix</span> <span class="function"><span class="keyword">func</span> +++ <span class="params">(vector: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Vector</span>(x: vector.x + <span class="number">1</span>, y: vector.y + <span class="number">1</span>, z: vector.z + <span class="number">1</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是编译的时候会报错，如下<br><img src="http://upload-images.jianshu.io/upload_images/571495-508132cfcf9a52a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这是因为我们没有明确的定义这个 <code>+++</code>，所以编译器不识别。所以我们应该申明一下这个运算符，正确的代码如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">prefix</span> <span class="keyword">operator</span> +++</div><div class="line"><span class="keyword">prefix</span> <span class="function"><span class="keyword">func</span> +++ <span class="params">(vector: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="type">Vector</span>(x: vector.x + <span class="number">1</span>, y: vector.y + <span class="number">1</span>, z: vector.z + <span class="number">1</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在前面我们用 <code>prefix operator +++</code> 声明前置运算符 +++ ，这样后面就可以用了<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="type">V3</span> = <span class="type">Vector</span>(x: <span class="number">1</span>, y: <span class="number">1</span>, z: <span class="number">1</span>)</div><div class="line"><span class="keyword">prefix</span> <span class="keyword">operator</span> +++</div><div class="line"><span class="keyword">prefix</span> <span class="function"><span class="keyword">func</span> +++ <span class="params">(vector: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Vector</span>(x: vector.x + <span class="number">1</span>, y: vector.y + <span class="number">1</span>, z: vector.z + <span class="number">1</span>)</div><div class="line">&#125;</div><div class="line"><span class="type">V3</span>+++</div></pre></td></tr></table></figure></p>
 <p>如上输出结果就是 Vector(x: 2, y: 2, z: 2)，到此，单目运算符的自定义就完成了。</p>
-<h4 id="2、自定义双目运算符"><a href="#2、自定义双目运算符" class="headerlink" title="2、自定义双目运算符"></a>2、自定义双目运算符</h4><p>双目运算符的定义和单目运算符的定义类似，但是双目运算符自定义的时候的关键字是 <code>infix</code>，如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">infix operator ** </div><div class="line">func ** (x: Double, y: Double) -&gt; Double &#123;</div><div class="line">    <span class="built_in">return</span> pow(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面我们就自定义了一个求平方的双目运算符 <code>**</code>，然后我们试试 <code>2 ** 2</code>就可以看到结果是 <code>4.0</code>。<br>上面好像没有什么问题了，下面我想算一个平方的平方，拨入 2 的 2次方的 3 次方，照着逻辑应该这样写<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2 ** 2 ** 3</div></pre></td></tr></table></figure></p>
-<p>但是编译我们会发现报错，如下<br><img src="http://upload-images.jianshu.io/upload_images/571495-b2e1e315590d0634.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>错误是说我们上面的运算是个非结合性的运算，所谓的结合性（associativity）就是运算的先后顺序，在 Swift 2 中我们都知道还有个优先级（precedence），默认的是 100 ，它的范围是 0~200 ，这个是用来设置运算符优先级的，比如在swift 2.2 中我们完全定义一个求平方运算符就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">infix operator ** &#123; associativity left precedence 120 &#125;</div><div class="line">func ** (x: Double, y: Double) -&gt; Double &#123;</div><div class="line">    </div><div class="line">    return pow(x, y)</div><div class="line">&#125;</div><div class="line">2 ** 2 ** 3  //结果是64.0</div></pre></td></tr></table></figure></p>
-<p>在 Swift 3 中有些变化，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">precedencegroup ComparativePrecedence &#123;</div><div class="line">    associativity: right</div><div class="line">    higherThan: LogicalConjunctionPrecedence</div><div class="line">&#125;</div><div class="line">infix operator ** : ComparativePrecedence</div><div class="line">func ** (x: Double, y: Double) -&gt; Double &#123;</div><div class="line">    </div><div class="line">    return pow(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="自定义双目运算符"><a href="#自定义双目运算符" class="headerlink" title="自定义双目运算符"></a>自定义双目运算符</h3><p>双目运算符的定义和单目运算符的定义类似，但是双目运算符自定义的时候的关键字是 <code>infix</code>，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> ** </div><div class="line"><span class="function"><span class="keyword">func</span> ** <span class="params">(x: Double, y: Double)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    <span class="keyword">return</span> pow(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面我们就自定义了一个求平方的双目运算符 <code>**</code>，然后我们试试 <code>2 ** 2</code>就可以看到结果是 <code>4.0</code>。<br>上面好像没有什么问题了，下面我想算一个平方的平方，拨入 2 的 2次方的 3 次方，照着逻辑应该这样写<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">2</span> ** <span class="number">2</span> ** <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>但是编译我们会发现报错，如下<br><img src="http://upload-images.jianshu.io/upload_images/571495-b2e1e315590d0634.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>错误是说我们上面的运算是个非结合性的运算，所谓的结合性（associativity）就是运算的先后顺序，在 Swift 2 中我们都知道还有个优先级（precedence），默认的是 100 ，它的范围是 0~200 ，这个是用来设置运算符优先级的，比如在swift 2.2 中我们完全定义一个求平方运算符就是<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> ** &#123; <span class="keyword">associativity</span> <span class="keyword">left</span> <span class="keyword">precedence</span> <span class="number">120</span> &#125;</div><div class="line"><span class="function"><span class="keyword">func</span> ** <span class="params">(x: Double, y: Double)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> pow(x, y)</div><div class="line">&#125;</div><div class="line"><span class="number">2</span> ** <span class="number">2</span> ** <span class="number">3</span>  <span class="comment">//结果是64.0</span></div></pre></td></tr></table></figure></p>
+<p>在 Swift 3 中有些变化，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">precedencegroup <span class="type">ComparativePrecedence</span> &#123;</div><div class="line">    <span class="keyword">associativity</span>: <span class="keyword">right</span></div><div class="line">    higherThan: <span class="type">LogicalConjunctionPrecedence</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> ** : <span class="type">ComparativePrecedence</span></div><div class="line"><span class="function"><span class="keyword">func</span> ** <span class="params">(x: Double, y: Double)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> pow(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>如上我们输入 <code>2 ** 2 ** 3</code>，就会发现结果是 256.0，这是因为我们把 associativity 设置成为了 right，所以运算从右边开始，先算 <code>2 ** 3 = 8.0</code>，然后再是 <code>2 ** 8.0 = 256.0</code>，如果我们把 associativity 设置成为了 left，就会发现结果是 64.0。关于更多的 associativity 和 higherThan 或者 lowerThan 之类的可以在下方参考连接中参考，这里就不一一说明了。<br>差不多运算符重载就到这里了，如果还有什么遗漏，欢迎大家指正！</p>
 <blockquote>
 <p>参考：<br>1、<a href="https://github.com/apple/swift-evolution/blob/master/proposals/0077-operator-precedence.md" target="_blank" rel="external">swift-evolution</a><br>2、<a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/swift/grammar/operator-declaration" target="_blank" rel="external">Operator Declaration</a></p>
@@ -438,9 +434,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Operator-Declaration/" rel="tag"># Operator Declaration</a>
-          
             <a href="/tags/swift/" rel="tag"># swift</a>
+          
+            <a href="/tags/Operator-Declaration/" rel="tag"># Operator Declaration</a>
           
             <a href="/tags/运算符重载/" rel="tag"># 运算符重载</a>
           
@@ -455,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/06/111/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2017/06/06/重读 Swift 之一：Optional（可选型）/" rel="next" title="重读 Swift 之一：Optional（可选型）">
+                <i class="fa fa-chevron-left"></i> 重读 Swift 之一：Optional（可选型）
               </a>
             
           </div>
@@ -527,7 +523,7 @@
                alt="HenryCheng" />
           <p class="site-author-name" itemprop="name">HenryCheng</p>
            
-              <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理 人生感悟</p>
+              <p class="site-description motion-element" itemprop="description">将要直面的，已成过往的，较之深埋于它内心的 皆为微沫</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -557,7 +553,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -589,7 +585,7 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http" target="_blank" title="Jianshu">
+                <a href="http://www.jianshu.com/users/233c37d8a732/latest_articles" target="_blank" title="Jianshu">
                   
                     <i class="fa fa-fw fa-globe"></i>
                   
@@ -621,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要重载运算符"><span class="nav-number">1.</span> <span class="nav-text">为什么要重载运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何重载运算符"><span class="nav-number">2.</span> <span class="nav-text">如何重载运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、含有两个参数的运算符的重载"><span class="nav-number">2.1.</span> <span class="nav-text">1、含有两个参数的运算符的重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、含有一个参数的运算符的重载"><span class="nav-number">2.2.</span> <span class="nav-text">2、含有一个参数的运算符的重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-、比较运算符的重载"><span class="nav-number">2.3.</span> <span class="nav-text">3 、比较运算符的重载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义运算符的重载"><span class="nav-number">3.</span> <span class="nav-text">自定义运算符的重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、自定义单目运算符"><span class="nav-number">3.0.1.</span> <span class="nav-text">1、自定义单目运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、自定义双目运算符"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、自定义双目运算符</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要重载运算符"><span class="nav-number">1.</span> <span class="nav-text">为什么要重载运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何重载运算符"><span class="nav-number">2.</span> <span class="nav-text">如何重载运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#含有两个参数的运算符的重载"><span class="nav-number">2.1.</span> <span class="nav-text">含有两个参数的运算符的重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#含有一个参数的运算符的重载"><span class="nav-number">2.2.</span> <span class="nav-text">含有一个参数的运算符的重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较运算符的重载"><span class="nav-number">2.3.</span> <span class="nav-text">比较运算符的重载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义运算符的重载"><span class="nav-number">3.</span> <span class="nav-text">自定义运算符的重载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义单目运算符"><span class="nav-number">3.1.</span> <span class="nav-text">自定义单目运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义双目运算符"><span class="nav-number">3.2.</span> <span class="nav-text">自定义双目运算符</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -696,6 +692,8 @@
   
 
 
+  
+
 
 
 
@@ -723,6 +721,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
