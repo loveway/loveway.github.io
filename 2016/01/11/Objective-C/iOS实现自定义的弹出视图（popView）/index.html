@@ -1,0 +1,798 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS, popView, 弹出视图" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
+<meta name="keywords" content="iOS, popView, 弹出视图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 实现自定义的弹出视图（popView）">
+<meta property="og:url" content="https://clearloveway.com/2016/01/11/Objective-C/iOS实现自定义的弹出视图（popView）/index.html">
+<meta property="og:site_name" content="温暖的弦">
+<meta property="og:description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-3d909ad023b875b3.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2017-06-16T17:12:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 实现自定义的弹出视图（popView）">
+<meta name="twitter:description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/571495-3d909ad023b875b3.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://clearloveway.com/2016/01/11/Objective-C/iOS实现自定义的弹出视图（popView）/"/>
+
+
+
+
+
+  <title>iOS 实现自定义的弹出视图（popView） | 温暖的弦</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">温暖的弦</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">那时我们有梦，关于文学，关于爱情，关于穿越世界的旅行  如今我们深夜饮酒，杯子碰到一起，都是梦破碎的声音。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://clearloveway.com/2016/01/11/Objective-C/iOS实现自定义的弹出视图（popView）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HenryCheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/loveway.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温暖的弦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 实现自定义的弹出视图（popView）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-11T00:00:00+08:00">
+                2016-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Objective-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Objective-C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下<a id="more"></a>：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-3d909ad023b875b3.gif?imageMogr2/auto-orient/strip" alt="效果图"></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>整个 <code>ViewController</code> 的代码大致如下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  SecondViewController.m</span></div><div class="line"><span class="comment">//  HWPopTool</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 16/1/11.</span></div><div class="line"><span class="comment">//  Copyright © 2016年 www.igancao.com. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"SecondViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"HWPopTool.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SecondViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIView</span> *contentView;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">SecondViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="keyword">self</span>.view.backgroundColor = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">    </div><div class="line">    _contentView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">300</span>)];</div><div class="line">    _contentView.backgroundColor = [<span class="built_in">UIColor</span> clearColor];</div><div class="line">    </div><div class="line">    <span class="built_in">UIButton</span> *btn = [<span class="built_in">UIButton</span> buttonWithType:<span class="built_in">UIButtonTypeCustom</span>];</div><div class="line">    btn.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">50</span>);</div><div class="line">    btn.backgroundColor = [<span class="built_in">UIColor</span> greenColor];</div><div class="line">    [btn addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(popViewShow) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</div><div class="line">    [<span class="keyword">self</span>.view addSubview:btn];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)popViewShow &#123;</div><div class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:_contentView.bounds];</div><div class="line">    imageV.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"jei"</span>];</div><div class="line">    [_contentView addSubview:imageV];</div><div class="line">    </div><div class="line">    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;</div><div class="line">    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;</div><div class="line">    [[HWPopTool sharedInstance] showWithPresentView:_contentView animated:<span class="literal">YES</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>我们引入了 <code>HWPopTool.h</code> ，并且创建了一个 <code>button</code> ，点击 <code>button</code> 的方法是 <code>popViewShow</code> ，我们来看一下这里面的代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)popViewShow &#123;</div><div class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:_contentView.bounds];</div><div class="line">    imageV.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"jei"</span>];</div><div class="line">    [_contentView addSubview:imageV];</div><div class="line">    </div><div class="line">    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;</div><div class="line">    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;</div><div class="line">    [[HWPopTool sharedInstance] showWithPresentView:_contentView animated:<span class="literal">YES</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里在 _contentView 上放了一个 imageView ，然后我们设置了 shadeBackgroundType 和 closeButtonType 以后，下面一句代码就是展示出来 popView  。<br>这里主要就是我们弹出一个 <code>view</code> ，至于这个 <code>view</code> 多大，上面放什么，都是由你自己决定的。</p>
+<h2 id="关于HWPopTool里面的一些属性和方法"><a href="#关于HWPopTool里面的一些属性和方法" class="headerlink" title="关于HWPopTool里面的一些属性和方法"></a>关于<code>HWPopTool</code>里面的一些属性和方法</h2><p>先来看一下 <code>HWPopTool.h</code><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  HWPopTool.h</span></div><div class="line"><span class="comment">//  HWPopTool</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 16/1/11.</span></div><div class="line"><span class="comment">//  Copyright © 2016年 www.igancao.com. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"><span class="comment">/**</span></div><div class="line"> *  关闭按钮的位置</div><div class="line"> */</div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, ButtonPositionType) &#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  无</div><div class="line">     */</div><div class="line">    ButtonPositionTypeNone = <span class="number">0</span>,</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  左上角</div><div class="line">     */</div><div class="line">    ButtonPositionTypeLeft = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  右上角</div><div class="line">     */</div><div class="line">    ButtonPositionTypeRight = <span class="number">2</span> &lt;&lt; <span class="number">0</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *  蒙板的背景色</div><div class="line"> */</div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, ShadeBackgroundType) &#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  渐变色</div><div class="line">     */</div><div class="line">    ShadeBackgroundTypeGradient = <span class="number">0</span>,</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  固定色</div><div class="line">     */</div><div class="line">    ShadeBackgroundTypeSolid = <span class="number">1</span> &lt;&lt; <span class="number">0</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^completeBlock)(<span class="keyword">void</span>);</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">HWPopTool</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIColor</span> *popBackgroudColor;<span class="comment">//弹出视图的背景色</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> tapOutsideToDismiss;<span class="comment">//点击蒙板是否弹出视图消失</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) ButtonPositionType closeButtonType;<span class="comment">//关闭按钮的类型</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) ShadeBackgroundType shadeBackgroundType;<span class="comment">//蒙板的背景色</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> *  创建一个实例</div><div class="line"> *</div><div class="line"> *  @return CHWPopTool</div><div class="line"> */</div><div class="line">+ (HWPopTool *)sharedInstance;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *  弹出要展示的View</div><div class="line"> *</div><div class="line"> *  @param presentView show View</div><div class="line"> *  @param animated    是否动画</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)showWithPresentView:(<span class="built_in">UIView</span> *)presentView animated:(<span class="built_in">BOOL</span>)animated;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *  关闭弹出视图</div><div class="line"> *</div><div class="line"> *  @param complete complete block</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)closeWithBlcok:(<span class="keyword">void</span>(^)())complete;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>由于之前写的比较仓促，今天趁着空余时间又把代码整理了一遍，比如关闭之后的回调，之前用 <code>delegate</code> 实现的，今天又用 <code>block</code> 重新写的，简洁一点吧，另外基本上所有的方法、属性、枚举我都有注释，算是个个人习惯吧。<br>这里面有几点需要说明的是：</p>
+<ul>
+<li>1.<code>ShadeBackgroundType</code>是蒙板的背景色属性，有固定的和渐变的（<code>ShadeBackgroundTypeGradient</code>），关于这个渐变，有兴趣的可以研究一下<code>CAGradientLayer</code>，还是很有趣的，在后来的文章中也会说到。</li>
+<li><ol>
+<li><code>tapOutsideToDismiss</code> 这个是设置点击蒙板，<code>popView</code> 消失不消失的属性，默认的是 <code>YES</code></li>
+</ol>
+</li>
+<li><ol>
+<li><code>- (void)closeWithBlcok:(void(^)())complete</code> 这个方法，是关闭后的回调，比如说发送红包以后，等 <code>popView</code> 消失以后回到上一页的这种。</li>
+</ol>
+</li>
+</ul>
+<p>由于注释的基本都很清楚了，这里就不多说了，</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我一般写博客的时候，贴代码喜欢贴全部的代码，我认为这样会直观一点（当然非常多的除外），最后，所有的代码 <code>demo</code> 都可以在 <a href="https://github.com/Loveway/HWPopTool" target="_blank" rel="external"><em>这里</em></a>  看到！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/popView/" rel="tag"># popView</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/05/Objective-C/iOS中一句代码解决倒计时问题/" rel="next" title="iOS 一句代码解决倒计时问题">
+                <i class="fa fa-chevron-left"></i> iOS 一句代码解决倒计时问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/26/Objective-C/iOS简单自定义滑动视图（UIScrollView）/" rel="prev" title="iOS 简单自定义滑动视图（UIScrollView）">
+                iOS 简单自定义滑动视图（UIScrollView） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/loveway.png"
+               alt="HenryCheng" />
+          <p class="site-author-name" itemprop="name">HenryCheng</p>
+           
+              <p class="site-description motion-element" itemprop="description">这里荒芜寸草不生 后来你来这走了一遭 奇迹般万物生长 这里是我的心</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Loveway" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2071869814/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/233c37d8a732/latest_articles" target="_blank" title="Jianshu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">1.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于HWPopTool里面的一些属性和方法"><span class="nav-number">2.</span> <span class="nav-text">关于HWPopTool里面的一些属性和方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HenryCheng</span>
+</div>
+
+<div class = "mail-info">
+  <!-- <span class="with-love">
+    <i class="fa fa-envelope"></i>
+  </span> <span class="mail-host"> mayjlee@126.com  </span> -->
+  愿你出走半生，归来仍是少年
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://loveway.github.io">HenryCheng</a> 基于 <a class="theme-link" href="https://hexo.io">Hexo</a> 而作
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

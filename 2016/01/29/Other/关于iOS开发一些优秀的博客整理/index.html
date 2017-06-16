@@ -1,0 +1,812 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS, 博客" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="做开发，辅助工具是必不可少的，有的人喜欢看书，有的人喜欢看博客，有的人喜欢看视频，就我个人而言，看博客的时间比较多，个人感觉看博客会多一些自己的理解和思考，所以也收藏了不少个人觉得有价值的博客，趁着今天有时间就稍微整理一下，分享出来，希望有兴趣的">
+<meta name="keywords" content="iOS, 博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 iOS 开发一些优秀的博客整理">
+<meta property="og:url" content="https://clearloveway.com/2016/01/29/Other/关于iOS开发一些优秀的博客整理/index.html">
+<meta property="og:site_name" content="温暖的弦">
+<meta property="og:description" content="做开发，辅助工具是必不可少的，有的人喜欢看书，有的人喜欢看博客，有的人喜欢看视频，就我个人而言，看博客的时间比较多，个人感觉看博客会多一些自己的理解和思考，所以也收藏了不少个人觉得有价值的博客，趁着今天有时间就稍微整理一下，分享出来，希望有兴趣的">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-6fda02524c66bf90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-351485cfa824c644.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-12a381c47d32c406.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-a8233245d54196ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-2116b64b8c13cc18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-039c0a029f1e3a8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-11c3f8f7752e994f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-4a94cdc4afe055c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-09a37a0f200d27fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-29b91ff1fb4f8633.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-41c5267c24ae033b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-e985da1ccdbbddfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-b56fdfb0c4d9e366.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-83589b323ac5e645.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-9cecd96b5a68f858.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-16T16:30:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于 iOS 开发一些优秀的博客整理">
+<meta name="twitter:description" content="做开发，辅助工具是必不可少的，有的人喜欢看书，有的人喜欢看博客，有的人喜欢看视频，就我个人而言，看博客的时间比较多，个人感觉看博客会多一些自己的理解和思考，所以也收藏了不少个人觉得有价值的博客，趁着今天有时间就稍微整理一下，分享出来，希望有兴趣的">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/571495-6fda02524c66bf90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://clearloveway.com/2016/01/29/Other/关于iOS开发一些优秀的博客整理/"/>
+
+
+
+
+
+  <title>关于 iOS 开发一些优秀的博客整理 | 温暖的弦</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">温暖的弦</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">那时我们有梦，关于文学，关于爱情，关于穿越世界的旅行  如今我们深夜饮酒，杯子碰到一起，都是梦破碎的声音。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://clearloveway.com/2016/01/29/Other/关于iOS开发一些优秀的博客整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HenryCheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/loveway.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温暖的弦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于 iOS 开发一些优秀的博客整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-29T00:00:00+08:00">
+                2016-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>做开发，辅助工具是必不可少的，有的人喜欢看书，有的人喜欢看博客，有的人喜欢看视频，就我个人而言，看博客的时间比较多，个人感觉看博客会多一些自己的理解和思考，所以也收藏了不少个人觉得有价值的博客，趁着今天有时间就稍微整理一下，分享出来，希望有兴趣的<a id="more"></a>也可以找到自己喜欢的！</p>
+<h2 id="唐巧的技术博客"><a href="#唐巧的技术博客" class="headerlink" title="唐巧的技术博客"></a><a href="http://blog.devtang.com/" target="_blank" rel="external">唐巧的技术博客</a></h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-6fda02524c66bf90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="唐巧的技术博客"><br>巧神就不用多说了，也是启蒙之一。</p>
+<h3 id="OneV’s-Den"><a href="#OneV’s-Den" class="headerlink" title="OneV’s Den"></a><a href="http://onevcat.com/" target="_blank" rel="external">OneV’s Den</a></h3><p><img src="http://upload-images.jianshu.io/upload_images/571495-351485cfa824c644.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="OneV&#39;s Den"><br>瞄神，Unity 开发者。现居日本，就职于 LINE，一直在用 <a href="https://github.com/onevcat/VVDocumenter-Xcode" target="_blank" rel="external">VVDocumenter</a> ，所著《swifter 2.0》目前在看</p>
+<h2 id="Garan-no-dou-一只魔法师的工坊"><a href="#Garan-no-dou-一只魔法师的工坊" class="headerlink" title="Garan no dou | 一只魔法师的工坊"></a><a href="http://blog.ibireme.com/" target="_blank" rel="external">Garan no dou | 一只魔法师的工坊</a></h2><hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-12a381c47d32c406.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Garan no dou | 一只魔法师的工坊"></p>
+<p>郭曜源，前段时间非常火的开源 <a href="https://github.com/ibireme/YYKit" target="_blank" rel="external">YYKit</a> 的作者，对图形处理性能有着独特的理解，个人非常喜欢它的代码风格，也在尝试着用其所开源的项目。这里有一篇关与他的采访：</p>
+<div class="note info"><p><a href="http://www.infoq.com/cn/news/2015/11/ibireme-interview?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">专访YYKit作者郭曜源：开源大牛是怎样炼成的</a></p>
+</div>
+<h2 id="Kitten’s-时间胶囊"><a href="#Kitten’s-时间胶囊" class="headerlink" title="Kitten’s 时间胶囊"></a><a href="http://kittenyang.com/" target="_blank" rel="external">Kitten’s 时间胶囊</a></h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-a8233245d54196ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Kitten&#39;s 时间胶囊"><br>杨骑滔(KittenYang)，对动画的理解比较好，之前研究动画效果的时候一直在看他的博客，学习了很多。所出的一本交互式电子书 <code>A GUIDE TO IOS ANIMATION</code> 也一直在看。</p>
+<h2 id="我就叫Sunny怎么了"><a href="#我就叫Sunny怎么了" class="headerlink" title="我就叫Sunny怎么了"></a><a href="http://blog.sunnyxx.com/" target="_blank" rel="external">我就叫Sunny怎么了</a></h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-2116b64b8c13cc18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="孙源的技术博客"><br>孙源，百度 90 后 iOS 开发工程师，对底层理解比较好，还有一些实用的技巧性东西，值得一看。</p>
+<h2 id="里脊串的开发随笔"><a href="#里脊串的开发随笔" class="headerlink" title="里脊串的开发随笔"></a><a href="http://adad184.com/" target="_blank" rel="external">里脊串的开发随笔</a></h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-039c0a029f1e3a8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="里脊串的开发随笔"><br>串哥的博客里面还是有不少好东西的，分享了很多经验技巧。</p>
+<h2 id="limboy"><a href="#limboy" class="headerlink" title="limboy"></a><a href="http://limboy.me" target="_blank" rel="external">limboy</a></h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-11c3f8f7752e994f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="limboy"><br>作者蘑菇街厂里的好像，有一些经验分享不错的。</p>
+<h2 id="魏先宇的程序人生"><a href="#魏先宇的程序人生" class="headerlink" title="魏先宇的程序人生"></a><a href="http://blog.csdn.net/likendsl" target="_blank" rel="external">魏先宇的程序人生</a></h2><p>讲得很详细，适合新手。<br><img src="http://upload-images.jianshu.io/upload_images/571495-4a94cdc4afe055c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="魏先宇的程序人生"></p>
+<h2 id="禅与-Objective-C-编程艺术-Zen-and-the-Art-of-the-Objective-C-Craftsmanship-中文翻译"><a href="#禅与-Objective-C-编程艺术-Zen-and-the-Art-of-the-Objective-C-Craftsmanship-中文翻译" class="headerlink" title="禅与 Objective-C 编程艺术  Zen and the Art of the Objective-C Craftsmanship 中文翻译"></a><a href="https://github.com/oa414/objc-zen-book-cn#designated-%E5%92%8C-secondary-initializers" target="_blank" rel="external">禅与 Objective-C 编程艺术  Zen and the Art of the Objective-C Craftsmanship 中文翻译</a></h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-09a37a0f200d27fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="禅与 Objective-C 编程艺术"><br>禅与 Objective-C 编程艺术  Zen and the Art of the Objective-C Craftsmanship 中文翻译，还是很不错的。</p>
+<h2 id="swift-2-0-官方翻译版本"><a href="#swift-2-0-官方翻译版本" class="headerlink" title="swift 2.0 官方翻译版本"></a><a href="http://wiki.jikexueyuan.com/project/swift/" target="_blank" rel="external">swift 2.0 官方翻译版本</a></h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-29b91ff1fb4f8633.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="swift 2.0"><br>苹果官方承认的翻译版本，<code>swift</code>入门必备。</p>
+<h2 id="Swift-GG-（2-26更新）"><a href="#Swift-GG-（2-26更新）" class="headerlink" title="Swift.GG （2.26更新）"></a><a href="http://swift.gg/" target="_blank" rel="external">Swift.GG</a> （2.26更新）</h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-41c5267c24ae033b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SwiftGG"><br>学习<code>Swift</code>非常好的一个地方</p>
+<h2 id="雷纯锋的技术博客（3-18更新）"><a href="#雷纯锋的技术博客（3-18更新）" class="headerlink" title="雷纯锋的技术博客（3.18更新）"></a><a href="http://blog.leichunfeng.com/" target="_blank" rel="external">雷纯锋的技术博客</a>（3.18更新）</h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-e985da1ccdbbddfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="雷纯锋的技术博客"></p>
+<p>学习 <code>RAC</code> 的话就这个了，不多解释。。。</p>
+<p>目前就先分享这么多，后面会持续更新。。。</p>
+<h2 id="南峰子的技术博客-（6-21更新）"><a href="#南峰子的技术博客-（6-21更新）" class="headerlink" title="南峰子的技术博客 （6.21更新）"></a><a href="http://southpeak.github.io/" target="_blank" rel="external">南峰子的技术博客</a> （6.21更新）</h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-b56fdfb0c4d9e366.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="南峰子的技术博客"><br>南大的博客，之前就职于百度，现就职于京东商城，可以学到不少东西</p>
+<h2 id="objc中国（6-21更新）"><a href="#objc中国（6-21更新）" class="headerlink" title="objc中国（6.21更新）"></a><a href="http://objccn.io/" target="_blank" rel="external">objc中国</a>（6.21更新）</h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-83589b323ac5e645.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="objc中国"><br>瞄神创建的社区，里面文章大都是翻译国外优秀作品，值得一看</p>
+<h2 id="没故事的卓同学（6-21更新）"><a href="#没故事的卓同学（6-21更新）" class="headerlink" title="没故事的卓同学（6.21更新）"></a><a href="http://www.jianshu.com/u/88a056103c02" target="_blank" rel="external">没故事的卓同学</a>（6.21更新）</h2><p><img src="http://upload-images.jianshu.io/upload_images/571495-9cecd96b5a68f858.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="没故事的卓同学"></p>
+<p>丁香园大佬，Swift 灵魂导师卓富贵 😀 ！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/26/Objective-C/iOS简单自定义滑动视图（UIScrollView）/" rel="next" title="iOS 简单自定义滑动视图（UIScrollView）">
+                <i class="fa fa-chevron-left"></i> iOS 简单自定义滑动视图（UIScrollView）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/27/Objective-C/iOS中利用-runtime-一键改变字体/" rel="prev" title="iOS 中利用 runtime 一键改变字体">
+                iOS 中利用 runtime 一键改变字体 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/loveway.png"
+               alt="HenryCheng" />
+          <p class="site-author-name" itemprop="name">HenryCheng</p>
+           
+              <p class="site-description motion-element" itemprop="description">这里荒芜寸草不生 后来你来这走了一遭 奇迹般万物生长 这里是我的心</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Loveway" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2071869814/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/233c37d8a732/latest_articles" target="_blank" title="Jianshu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Jianshu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#唐巧的技术博客"><span class="nav-number">1.</span> <span class="nav-text">唐巧的技术博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OneV’s-Den"><span class="nav-number">1.1.</span> <span class="nav-text">OneV’s Den</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Garan-no-dou-一只魔法师的工坊"><span class="nav-number">2.</span> <span class="nav-text">Garan no dou | 一只魔法师的工坊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kitten’s-时间胶囊"><span class="nav-number">3.</span> <span class="nav-text">Kitten’s 时间胶囊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我就叫Sunny怎么了"><span class="nav-number">4.</span> <span class="nav-text">我就叫Sunny怎么了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#里脊串的开发随笔"><span class="nav-number">5.</span> <span class="nav-text">里脊串的开发随笔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limboy"><span class="nav-number">6.</span> <span class="nav-text">limboy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#魏先宇的程序人生"><span class="nav-number">7.</span> <span class="nav-text">魏先宇的程序人生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禅与-Objective-C-编程艺术-Zen-and-the-Art-of-the-Objective-C-Craftsmanship-中文翻译"><span class="nav-number">8.</span> <span class="nav-text">禅与 Objective-C 编程艺术  Zen and the Art of the Objective-C Craftsmanship 中文翻译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swift-2-0-官方翻译版本"><span class="nav-number">9.</span> <span class="nav-text">swift 2.0 官方翻译版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-GG-（2-26更新）"><span class="nav-number">10.</span> <span class="nav-text">Swift.GG （2.26更新）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#雷纯锋的技术博客（3-18更新）"><span class="nav-number">11.</span> <span class="nav-text">雷纯锋的技术博客（3.18更新）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#南峰子的技术博客-（6-21更新）"><span class="nav-number">12.</span> <span class="nav-text">南峰子的技术博客 （6.21更新）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#objc中国（6-21更新）"><span class="nav-number">13.</span> <span class="nav-text">objc中国（6.21更新）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没故事的卓同学（6-21更新）"><span class="nav-number">14.</span> <span class="nav-text">没故事的卓同学（6.21更新）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HenryCheng</span>
+</div>
+
+<div class = "mail-info">
+  <!-- <span class="with-love">
+    <i class="fa fa-envelope"></i>
+  </span> <span class="mail-host"> mayjlee@126.com  </span> -->
+  愿你出走半生，归来仍是少年
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://loveway.github.io">HenryCheng</a> 基于 <a class="theme-link" href="https://hexo.io">Hexo</a> 而作
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
