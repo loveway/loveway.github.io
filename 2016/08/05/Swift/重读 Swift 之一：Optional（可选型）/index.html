@@ -98,10 +98,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="重读 Swift 之一：Optional（可选型）">
 <meta property="og:url" content="https://clearloveway.com/2016/08/05/Swift/重读 Swift 之一：Optional（可选型）/index.html">
-<meta property="og:site_name" content="温暖的弦">
+<meta property="og:site_name" content="HenryCheng">
 <meta property="og:description" content="之前学习 Swift 的时候都是比较破碎，零零散散，以至于有些地方学习的不够透彻。所以趁最近有时间，就开始重新学习 Swift ，从最基本的开始学习，希望能深入理解，见微知著！关于 Swift 我们都是到是类型安全型的，相较于 OC ，安全似乎更能体现出来。关于这一方面， Swift 的可选型（optional）就不得不说了，可选型可以说是 Swift 最为突出的特性之一。可能有的同学在看 Swi">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-1af13cff33c0abd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-06-28T06:07:00.000Z">
+<meta property="og:updated_time" content="2017-11-08T09:13:14.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重读 Swift 之一：Optional（可选型）">
 <meta name="twitter:description" content="之前学习 Swift 的时候都是比较破碎，零零散散，以至于有些地方学习的不够透彻。所以趁最近有时间，就开始重新学习 Swift ，从最基本的开始学习，希望能深入理解，见微知著！关于 Swift 我们都是到是类型安全型的，相较于 OC ，安全似乎更能体现出来。关于这一方面， Swift 的可选型（optional）就不得不说了，可选型可以说是 Swift 最为突出的特性之一。可能有的同学在看 Swi">
@@ -139,7 +139,7 @@
 
 
 
-  <title>重读 Swift 之一：Optional（可选型） | 温暖的弦</title>
+  <title>重读 Swift 之一：Optional（可选型） | HenryCheng</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">温暖的弦</span>
+        <span class="site-title">HenryCheng</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -288,7 +288,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温暖的弦">
+      <meta itemprop="name" content="HenryCheng">
     </span>
 
     
@@ -365,7 +365,7 @@
 
       
         <p>之前学习 Swift 的时候都是比较破碎，零零散散，以至于有些地方学习的不够透彻。所以趁最近有时间，就开始重新学习 Swift ，从最基本的开始学习，希望能深入理解，见微知著！<br>关于 Swift 我们都是到是类型安全型的，相较于 OC ，安全似乎更能体现出来。关于这一方面， Swift 的可选型（optional）就不得不说了，可选型可以说是 Swift 最为突出的特性之一。可能有的同学在看 Swift 的过程中会遇到可选型（比如 <code>String?</code> ），有时也会见到 <code>String!</code> 这样的，搞不明白其中的意思，所以今天就来一步步理解可选型。<a id="more"></a></p>
-<h1 id="一、什么是-Optional"><a href="#一、什么是-Optional" class="headerlink" title="一、什么是 Optional"></a>一、什么是 Optional</h1><p>Optional 是 Swift 新加入的类型，所以学过 OC 的童鞋就知道在 OC 中是没有这个概念的。可选型的意思简单理解是：有值得时候就有值，无值的时候就是 nil 。Swift 中的 nil 和其他语言中的 nil 还有些不一样，nil 自己本身就是一种类型，没有就是 nil ，是和其他类型严格区分开的。<br>可选型的定义很简单：类型 + ? 。比如  <code>String?</code>、<code>Int?</code>、<code>Float?</code> 等，这里需要注意的是 <code>String?</code> 和 <code>String</code> 是完全不同的两个类型，前者是 <code>String</code> 类型的额可选型，后者是 <code>String</code> 类型，注意区分。举个例子，在 OC 中我们可以这样写<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *name = <span class="string">@"loveway"</span>;</div><div class="line">name = <span class="literal">nil</span>;</div></pre></td></tr></table></figure></p>
+<h2 id="什么是-Optional"><a href="#什么是-Optional" class="headerlink" title="什么是 Optional"></a>什么是 Optional</h2><p>Optional 是 Swift 新加入的类型，所以学过 OC 的童鞋就知道在 OC 中是没有这个概念的。可选型的意思简单理解是：有值得时候就有值，无值的时候就是 nil 。Swift 中的 nil 和其他语言中的 nil 还有些不一样，nil 自己本身就是一种类型，没有就是 nil ，是和其他类型严格区分开的。<br>可选型的定义很简单：类型 + ? 。比如  <code>String?</code>、<code>Int?</code>、<code>Float?</code> 等，这里需要注意的是 <code>String?</code> 和 <code>String</code> 是完全不同的两个类型，前者是 <code>String</code> 类型的额可选型，后者是 <code>String</code> 类型，注意区分。举个例子，在 OC 中我们可以这样写<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *name = <span class="string">@"loveway"</span>;</div><div class="line">name = <span class="literal">nil</span>;</div></pre></td></tr></table></figure></p>
 <p>上面的这种写法在 OC 中是没有问题的，相比于上面，在 swift 中</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"loveway"</span></div><div class="line">name = <span class="literal">nil</span></div></pre></td></tr></table></figure>
 <p>如果我们像上面代码中这样写就会报错，如下</p>
@@ -381,24 +381,24 @@
 </blockquote>
 <p>这样，只不过我们一般都用<br> <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="literal">nil</span></div></pre></td></tr></table></figure></p>
 <p> 这样的简写。</p>
-<h1 id="二、Optional的解包"><a href="#二、Optional的解包" class="headerlink" title="二、Optional的解包"></a>二、Optional的解包</h1><p>可选型是不能够被直接使用的（因为 Swift 是类型安全的，可选型的值又可能会是 nil，如果不做处理可能导致程序 crash），如果我们想使用可选型的值，那么在这之前我们需要做的一项工作就是：解包（unwarp）！</p>
-<h2 id="1、强制解包"><a href="#1、强制解包" class="headerlink" title="1、强制解包"></a>1、强制解包</h2><p>所谓的强制解包意思就是我知道这个类型是可选型，但是在我的程序执行到这里的时候我可以保证它是有值得，所以我要在这里使用它。具体表现形式就是在可选型后面加个 <code>!</code>，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="string">"My name is "</span> + name!</div></pre></td></tr></table></figure></p>
+<h2 id="Optional的解包"><a href="#Optional的解包" class="headerlink" title="Optional的解包"></a>Optional的解包</h2><p>可选型是不能够被直接使用的（因为 Swift 是类型安全的，可选型的值又可能会是 nil，如果不做处理可能导致程序 crash），如果我们想使用可选型的值，那么在这之前我们需要做的一项工作就是：解包（unwarp）！</p>
+<h3 id="强制解包"><a href="#强制解包" class="headerlink" title="强制解包"></a>强制解包</h3><p>所谓的强制解包意思就是我知道这个类型是可选型，但是在我的程序执行到这里的时候我可以保证它是有值得，所以我要在这里使用它。具体表现形式就是在可选型后面加个 <code>!</code>，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="string">"My name is "</span> + name!</div></pre></td></tr></table></figure></p>
 <p>但是这样的解包是不安全，因为你不知道什么时候你的这个可选型就会变成 nil，如果我们代码非常多的话，一不小心为 nil了，可能会导致程序崩溃。这个时候我们会想到一种方法：判空！如下，<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="keyword">if</span> name != <span class="literal">nil</span> &#123; </div><div class="line">   <span class="string">"My name is "</span> + name!</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"name is nil"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这样写似乎是没有什么问题了，但是需要注意的是，你在判断非 nil 的作用域内使用 name 的时候还必须把 <code>!</code> 带上，这样代码比较多的时候还是比较麻烦。于是我们可以使用下面这种方式，</p>
-<h2 id="2、使用-if-let-解包"><a href="#2、使用-if-let-解包" class="headerlink" title="2、使用 if let 解包"></a>2、使用 <code>if let</code> 解包</h2><p>使用  <code>if let</code> 解包如下，<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = name &#123;</div><div class="line">   <span class="string">"My name is "</span> + name</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"name is nil"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="使用-if-let-解包"><a href="#使用-if-let-解包" class="headerlink" title="使用 if let 解包"></a>使用 <code>if let</code> 解包</h3><p>使用  <code>if let</code> 解包如下，<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = name &#123;</div><div class="line">   <span class="string">"My name is "</span> + name</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"name is nil"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这种解包方式可以保证 name 是解包过的，不会再是 nil 这种情况，其实逻辑是和上面做非空判断一样的。当然你把  <code>let</code> 换成 <code>var</code> 也是可以的，效果是一样的，只不过我们一般要用的是解包后的值，而不会去改变它，所以平常使用中一般都是用  <code>if let</code> 。<br>同时  <code>if let</code> 可以同时一次性解包多个可选型，用  <code>,</code> 隔开，使语句简洁，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="keyword">var</span> age: <span class="type">Int</span>? = <span class="number">18</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = name, age = age &#123;</div><div class="line">   <span class="string">"My name is "</span> + name</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"name is nil"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>最后，既然这里使用的是 <code>if</code> ，那么同样我们可以如下这样用，来进行进一步的判断筛选<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="keyword">var</span> age: <span class="type">Int</span>? = <span class="number">18</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = name, age = age <span class="keyword">where</span> age == <span class="number">18</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"My name is \(name), age is \(String(age))"</span>)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"name is nil"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>如上也是可以的。</p>
-<h1 id="三、可选链式调用（Optional-Chaining）"><a href="#三、可选链式调用（Optional-Chaining）" class="headerlink" title="三、可选链式调用（Optional Chaining）"></a>三、可选链式调用（Optional Chaining）</h1><p>可选链式调用（Optional Chaining）是一种可以在当前值可能为 nil 的可选值上请求和调用属性、方法及下标的方法。如果可选值有值，那么调用就会成功，如果可选值是 nil ，那么调用将返回 nil。多个调用可以连接在一起形成一个调用链，如果其中任何一个节点为 nil ，整个调用链都会失败，即返回 nil 。  </p>
+<h2 id="可选链式调用（Optional-Chaining）"><a href="#可选链式调用（Optional-Chaining）" class="headerlink" title="可选链式调用（Optional Chaining）"></a>可选链式调用（Optional Chaining）</h2><p>可选链式调用（Optional Chaining）是一种可以在当前值可能为 nil 的可选值上请求和调用属性、方法及下标的方法。如果可选值有值，那么调用就会成功，如果可选值是 nil ，那么调用将返回 nil。多个调用可以连接在一起形成一个调用链，如果其中任何一个节点为 nil ，整个调用链都会失败，即返回 nil 。  </p>
 <p>下面我们就来举个例子具体说明可选链，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = name &#123;</div><div class="line">    <span class="built_in">print</span>(name.uppercaseString)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"name is nil"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我们来解包 name ，如果有值就打印出 name 的大写，如果没有就输出 <code>name is nil</code> ，其实上面这段代码完全等同于<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line">name?.uppercaseString</div></pre></td></tr></table></figure></p>
 <p>上面这句代码的意思就是如果可选型变量 name 有值，那么就对 name 进行解包，并得到 name 的uppercaseString 值，如果没有，那么这句代码就会返回一个 nil 。这样就符合 Swift 的类型安全，完全是没有问题的。但是如果你写成<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>? = <span class="string">"loveway"</span></div><div class="line">name!.uppercaseString</div></pre></td></tr></table></figure></p>
 <p>也是可以的，不过不安全，因为如果 name 没有值，你进行强制解包，就会报错。<br>所以我们以后可能会用到类似于 <code>person?.name?.uppercaseString</code> 这样的一层层解包的，这种就是可选链。</p>
-<h1 id="四、Nil-Coalescing-Operator（空合运算符）"><a href="#四、Nil-Coalescing-Operator（空合运算符）" class="headerlink" title="四、Nil Coalescing Operator（空合运算符）"></a>四、Nil Coalescing Operator（空合运算符）</h1><p>如上，如果我们想把解包后的值存起来的话，可以这样<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> newName = name == <span class="literal">nil</span> ? <span class="string">"no name"</span> : name!</div></pre></td></tr></table></figure></p>
+<h2 id="Nil-Coalescing-Operator（空合运算符）"><a href="#Nil-Coalescing-Operator（空合运算符）" class="headerlink" title="Nil Coalescing Operator（空合运算符）"></a>Nil Coalescing Operator（空合运算符）</h2><p>如上，如果我们想把解包后的值存起来的话，可以这样<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> newName = name == <span class="literal">nil</span> ? <span class="string">"no name"</span> : name!</div></pre></td></tr></table></figure></p>
 <p>上面代码的意思就是如果 name 为 nil ，newName 就是  “no name”，否则 newName 就是 name!（name的解包）。其实 Swift 为我们提供了更简洁的语法，如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> newName2 = name ?? <span class="string">"no name"</span></div></pre></td></tr></table></figure></p>
 <p>上面代码的意思就是 name 如果有值 newName2 的值就是 name! ,否则就是 no name 。这里需要注意的是 <code>??</code>是空合运算符，这样写的可阅读性强，比较简洁。<br>当然关于 <code>??</code> 远不止这些，有兴趣的同学可以看 <a href="http://www.jianshu.com/p/3ede1ec31351" target="_blank" rel="external">聊聊swift语言中的“??”</a> 这篇文章。</p>
-<h1 id="五、隐式可选型"><a href="#五、隐式可选型" class="headerlink" title="五、隐式可选型"></a>五、隐式可选型</h1><p>上面我们都知道了，创建一个显示可选型是: 类型 + <code>?</code>。这里创建隐式可选型的就是： 类型 + <code>!</code>。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>! = <span class="string">"loveway"</span></div></pre></td></tr></table></figure></p>
-<p>这里可能有的童鞋会疑惑，已经有了显示的可选型，为什么还需要有隐式的可选型。这里其实隐式的可选型也是有一定作用的。比如你有一个变量，声明为隐式的可选型（<code>!</code>），它的作用就是，当你这个类没有被初始化的时候他是没有值的，但是当你这个类初始化以后，你可以确保他是有值的，所以这里声明为隐式的可选型，而不是显示的。同样需要注意的是隐式的可选型也是可选型，如果你需要用它的值，你也是要进行判断的。如果不进行判断而直接使用，可能会造成不可预料的后果！<br>差不多可选型就到这里了，如果还有什么遗漏，欢迎大家指正！<br><div class="note info"><p>参考链接：<a href="http://wiki.jikexueyuan.com/project/swift/chapter2/17_Optional_Chaining.html" target="_blank" rel="external">可选链式调用（Optional Chaining）</a></p>
+<h2 id="隐式可选型"><a href="#隐式可选型" class="headerlink" title="隐式可选型"></a>隐式可选型</h2><p>上面我们都知道了，创建一个显示可选型是: 类型 + <code>?</code>。这里创建隐式可选型的就是： 类型 + <code>!</code>。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: <span class="type">String</span>! = <span class="string">"loveway"</span></div></pre></td></tr></table></figure></p>
+<p>这里可能有的童鞋会疑惑，已经有了显示的可选型，为什么还需要有隐式的可选型。这里其实隐式的可选型也是有一定作用的。比如你有一个变量，声明为隐式的可选型（<code>!</code>），它的作用就是，当你这个类没有被初始化的时候他是没有值的，但是当你这个类初始化以后，你可以确保他是有值的，所以这里声明为隐式的可选型，而不是显示的。同样需要注意的是隐式的可选型也是可选型，如果你需要用它的值，你也是要进行判断的。如果不进行判断而直接使用，可能会造成不可预料的后果！<br>差不多可选型就到这里了，如果还有什么遗漏，欢迎大家指正！<br><div class="note info"><p>参考：<br><a href="http://wiki.jikexueyuan.com/project/swift/chapter2/17_Optional_Chaining.html" target="_blank" rel="external">可选链式调用（Optional Chaining）</a></p>
 </div></p>
 
       
@@ -530,7 +530,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -541,7 +541,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -552,7 +552,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -616,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、什么是-Optional"><span class="nav-number">1.</span> <span class="nav-text">一、什么是 Optional</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Optional的解包"><span class="nav-number">2.</span> <span class="nav-text">二、Optional的解包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、强制解包"><span class="nav-number">2.1.</span> <span class="nav-text">1、强制解包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、使用-if-let-解包"><span class="nav-number">2.2.</span> <span class="nav-text">2、使用 if let 解包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、可选链式调用（Optional-Chaining）"><span class="nav-number">3.</span> <span class="nav-text">三、可选链式调用（Optional Chaining）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、Nil-Coalescing-Operator（空合运算符）"><span class="nav-number">4.</span> <span class="nav-text">四、Nil Coalescing Operator（空合运算符）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、隐式可选型"><span class="nav-number">5.</span> <span class="nav-text">五、隐式可选型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-Optional"><span class="nav-number">1.</span> <span class="nav-text">什么是 Optional</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional的解包"><span class="nav-number">2.</span> <span class="nav-text">Optional的解包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制解包"><span class="nav-number">2.1.</span> <span class="nav-text">强制解包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-if-let-解包"><span class="nav-number">2.2.</span> <span class="nav-text">使用 if let 解包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选链式调用（Optional-Chaining）"><span class="nav-number">3.</span> <span class="nav-text">可选链式调用（Optional Chaining）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nil-Coalescing-Operator（空合运算符）"><span class="nav-number">4.</span> <span class="nav-text">Nil Coalescing Operator（空合运算符）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式可选型"><span class="nav-number">5.</span> <span class="nav-text">隐式可选型</span></a></li></ol></div>
             
 
           </div>

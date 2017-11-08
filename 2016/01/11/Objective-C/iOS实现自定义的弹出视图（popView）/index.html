@@ -98,10 +98,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 实现自定义的弹出视图（popView）">
 <meta property="og:url" content="https://clearloveway.com/2016/01/11/Objective-C/iOS实现自定义的弹出视图（popView）/index.html">
-<meta property="og:site_name" content="温暖的弦">
+<meta property="og:site_name" content="HenryCheng">
 <meta property="og:description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-3d909ad023b875b3.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2017-06-16T17:12:22.000Z">
+<meta property="og:updated_time" content="2017-11-08T09:12:00.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 实现自定义的弹出视图（popView）">
 <meta name="twitter:description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
@@ -139,7 +139,7 @@
 
 
 
-  <title>iOS 实现自定义的弹出视图（popView） | 温暖的弦</title>
+  <title>iOS 实现自定义的弹出视图（popView） | HenryCheng</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">温暖的弦</span>
+        <span class="site-title">HenryCheng</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -288,7 +288,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温暖的弦">
+      <meta itemprop="name" content="HenryCheng">
     </span>
 
     
@@ -374,14 +374,8 @@
 <p>由于之前写的比较仓促，今天趁着空余时间又把代码整理了一遍，比如关闭之后的回调，之前用 <code>delegate</code> 实现的，今天又用 <code>block</code> 重新写的，简洁一点吧，另外基本上所有的方法、属性、枚举我都有注释，算是个个人习惯吧。<br>这里面有几点需要说明的是：</p>
 <ul>
 <li>1.<code>ShadeBackgroundType</code>是蒙板的背景色属性，有固定的和渐变的（<code>ShadeBackgroundTypeGradient</code>），关于这个渐变，有兴趣的可以研究一下<code>CAGradientLayer</code>，还是很有趣的，在后来的文章中也会说到。</li>
-<li><ol>
-<li><code>tapOutsideToDismiss</code> 这个是设置点击蒙板，<code>popView</code> 消失不消失的属性，默认的是 <code>YES</code></li>
-</ol>
-</li>
-<li><ol>
-<li><code>- (void)closeWithBlcok:(void(^)())complete</code> 这个方法，是关闭后的回调，比如说发送红包以后，等 <code>popView</code> 消失以后回到上一页的这种。</li>
-</ol>
-</li>
+<li>2.<code>tapOutsideToDismiss</code> 这个是设置点击蒙板，<code>popView</code> 消失不消失的属性，默认的是 <code>YES</code></li>
+<li>3.<code>- (void)closeWithBlcok:(void(^)())complete</code> 这个方法，是关闭后的回调，比如说发送红包以后，等 <code>popView</code> 消失以后回到上一页的这种。</li>
 </ul>
 <p>由于注释的基本都很清楚了，这里就不多说了，</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我一般写博客的时候，贴代码喜欢贴全部的代码，我认为这样会直观一点（当然非常多的除外），最后，所有的代码 <code>demo</code> 都可以在 <a href="https://github.com/Loveway/HWPopTool" target="_blank" rel="external"><em>这里</em></a>  看到！</p>
@@ -513,7 +507,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -524,7 +518,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -535,7 +529,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
