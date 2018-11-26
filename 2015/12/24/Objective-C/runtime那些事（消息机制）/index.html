@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      runtime 那些事（消息机制） | HenryCheng 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="HenryCheng">
+    
+    
+
+    <meta name="description" content="关于 runtime之前在项目中有遇到过用 runtime 解决改变全局字体的问题，所以再一次感受到了 runtime 黑魔法的强大，趁现在有机会分享一下对 runtime 的一些理解。在对象调用方法是 Objective-C 中经常使用的功能，也就是消息的传递，而">
+<meta name="keywords" content="runtime,Objective-C,消息机制,运行时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="runtime 那些事（消息机制） | HenryCheng">
+<meta property="og:url" content="https://clearloveway.com/2015/12/24/Objective-C/runtime那些事（消息机制）/index.html">
+<meta property="og:site_name" content="HenryCheng">
+<meta property="og:description" content="关于 runtime之前在项目中有遇到过用 runtime 解决改变全局字体的问题，所以再一次感受到了 runtime 黑魔法的强大，趁现在有机会分享一下对 runtime 的一些理解。在对象调用方法是 Objective-C 中经常使用的功能，也就是消息的传递，而">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-5cd12b17d449bab1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-43e75b645ee60124.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-09T10:03:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="runtime 那些事（消息机制） | HenryCheng">
+<meta name="twitter:description" content="关于 runtime之前在项目中有遇到过用 runtime 解决改变全局字体的问题，所以再一次感受到了 runtime 黑魔法的强大，趁现在有机会分享一下对 runtime 的一些理解。在对象调用方法是 Objective-C 中经常使用的功能，也就是消息的传递，而">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/571495-5cd12b17d449bab1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">HenryCheng</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          那时我们有梦，关于文学，关于爱情，关于穿越世界的旅行  如今我们深夜饮酒，杯子碰到一起，都是梦破碎的声音。
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">runtime 那些事（消息机制）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2015-12-24" class="post-meta__date date">2015-12-24</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Objective-C/">Objective-C</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Objective-C/">Objective-C</a>, <a class="tags-link" href="/tags/runtime/">runtime</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="关于-runtime"><a href="#关于-runtime" class="headerlink" title="关于 runtime"></a>关于 runtime</h2><p>之前在项目中有遇到过用 <code>runtime</code> 解决改变全局字体的问题，所以再一次感受到了 <code>runtime</code> 黑魔法的强大，趁现在有机会分享一下对 <code>runtime</code> 的一些理解。<br>在对象调用方法是 <code>Objective-C</code> 中经常使用的功能，也就是消息的传递，而<a id="more"></a> <code>Objective-C</code> 是 <code>C</code> 的超集，所以和 <code>C</code> 不同的是，<code>Objective-C</code> 使用的是动态绑定，也就是 <code>runtime</code>。 <code>Objective-C</code> 的消息传递和消息机制也就不多说了，今天主要说的是动态方法，也就是函数的调用。</p>
+<h2 id="相关的几个函数"><a href="#相关的几个函数" class="headerlink" title="相关的几个函数"></a>相关的几个函数</h2><p>下面一张图详细的概括了每个函数调用的先后以及执行的前提</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-5cd12b17d449bab1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="消息传递函数的调用"></p>
+<h3 id="对象在收到无法解读的消息后，首先会调用所属类的"><a href="#对象在收到无法解读的消息后，首先会调用所属类的" class="headerlink" title="对象在收到无法解读的消息后，首先会调用所属类的"></a>对象在收到无法解读的消息后，首先会调用所属类的</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel</div></pre></td></tr></table></figure>
+<p>这个方法在运行时，没有找到 <code>SEL</code> 的 <code>IMP</code> 时就会执行。这个函数是给类利用 <code>class_addMethod</code> 添加函数的机会。根据文档，如果实现了添加函数代码则返回 <code>YES</code> ，未实现返回 <code>NO</code> 。<br>举个例子，新建了一个工程，首先我在 <code>ViewController</code> 这个类中执行 <code>doSomething1</code> 这个方法，代码如下<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  ViewController.m</span></div><div class="line"><span class="comment">//  RuntimeTest1</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 15/12/24.</span></div><div class="line"><span class="comment">//  Copyright © 2015年 www.igancao.com  All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    [<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(doSomething)];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">**2015-12-24 10:35:37.726 RuntimeTest1[1877:337842] -[ViewController doSomething]: unrecognized selector sent to instance 0x7fe9f3736680**</div><div class="line">**2015-12-24 10:35:37.729 RuntimeTest1[1877:337842] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[ViewController doSomething]: unrecognized selector sent to instance 0x7fe9f3736680'**</div><div class="line">***** First throw call stack:**</div></pre></td></tr></table></figure></p>
+<p>不出意外，程序崩溃，因为没有找到 <code>doSomething</code> 这个方法，下面我们在里面实现 <code>+ (BOOL)resolveInstanceMethod:(SEL)sel</code> 这个方法，并且判断如果 <code>SEL</code> 是 <code>doSomething</code> 那就输出 <code>add method here</code><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  ViewController.m</span></div><div class="line"><span class="comment">//  RuntimeTest1</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 15/12/24.</span></div><div class="line"><span class="comment">//  Copyright © 2015年 www.igancao.com All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    [<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(doSomething)];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel &#123;</div><div class="line">    <span class="keyword">if</span> (sel == <span class="keyword">@selector</span>(doSomething)) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"add method here"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> [<span class="keyword">super</span> resolveInstanceMethod:sel];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>继续运行，然后看到 <code>log</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">**2015-12-24 10:47:24.687 RuntimeTest1[2007:382077] add method here**</div><div class="line">**2015-12-24 10:47:24.687 RuntimeTest1[2007:382077] -[ViewController doSomething]: unrecognized selector sent to instance 0x7f9568c331f0**</div><div class="line">**2015-12-24 10:47:24.690 RuntimeTest1[2007:382077] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[ViewController doSomething]: unrecognized selector sent to instance 0x7f9568c331f0'**</div><div class="line">***** First throw call stack:**</div></pre></td></tr></table></figure>
+<p>可以看到程序依然是崩溃了，但是我们可以看到输出了 <code>add method here</code> ，这说明我们 <code>+ (BOOL)resolveInstanceMethod:(SEL)sel</code> 这个方法执行了，并进入了判断，所以，在这儿，我们可以做一下操作，使这个方法得到响应，不至于走到最后 <code>- (void)doesNotRecognizeSelector:(SEL)aSelector</code>这个方法中而崩掉了，接下来，我们继续操作，如下<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  ViewController.m</span></div><div class="line"><span class="comment">//  RuntimeTest1</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 15/12/24.</span></div><div class="line"><span class="comment">//  Copyright © 2015年 www.igancao.com All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    [<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(doSomething)];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel &#123;</div><div class="line">    <span class="keyword">if</span> (sel == <span class="keyword">@selector</span>(doSomething)) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"add method here"</span>);</div><div class="line">        class_addMethod([<span class="keyword">self</span> <span class="keyword">class</span>], sel, (IMP)dynamicMethodIMP, <span class="string">"v@:"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> [<span class="keyword">super</span> resolveInstanceMethod:sel];</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> dynamicMethodIMP (<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd) &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"doSomething SEL"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>导入了 <code>&lt;objc/runtime.h&gt;</code> 并且在 <code>+ (BOOL)resolveInstanceMethod:(SEL)sel</code> 这个方法中执行了 <code>class_addMethod</code> 这个方法，然后定义了一个 <code>void dynamicMethodIMP (id self, SEL _cmd)</code> 这个函数，运行工程，看 <code>log</code><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">**<span class="number">2015</span><span class="number">-12</span><span class="number">-24</span> <span class="number">11</span>:<span class="number">45</span>:<span class="number">11.934</span> RuntimeTest1[<span class="number">2284</span>:<span class="number">478571</span>] add method here**</div><div class="line">**<span class="number">2015</span><span class="number">-12</span><span class="number">-24</span> <span class="number">11</span>:<span class="number">45</span>:<span class="number">11.934</span> RuntimeTest1[<span class="number">2284</span>:<span class="number">478571</span>] doSomething SEL**</div></pre></td></tr></table></figure></p>
+<p>这时候我们发现，程序并没有崩溃，而且还输出了 <code>doSomething SEL</code> ，这时候就说明我们已经通过 <code>runtime</code> 成功的向我们这个类中添加了一个方法。关于 <code>class_addMethod</code> 这个方法，是这样定义的<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">OBJC_EXPORT BOOL <span class="title">class_addMethod</span><span class="params">(Class cls, SEL name, IMP imp,  <span class="keyword">const</span> <span class="keyword">char</span> *types)</span></span></div></pre></td></tr></table></figure></p>
+<div class="note info"><p><code>cls</code> 在这个类中添加方法，也就是方法所添加的类<br><code>name</code> 方法名，这个可以随便起的<br><code>imp</code> 实现这个方法的函数<br><code>types</code>定义该数返回值类型和参数类型的字符串，这里比如<code>&quot;v@:&quot;</code>，其中<code>v</code>就是<code>void</code>，带表返回类型就是空，<code>@</code>代表参数，这里指的是<code>id(self)</code>，这里<code>:</code>指的是方法<code>SEL(_cmd)</code>，比如我再定义一个函数</p>
+</div>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">newMethod</span> <span class="params">(id self, SEL _cmd, NSString *str)</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">100</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么添加这个函数的方法就应该是<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ass_addMethod([self class], @selector(newMethod), (IMP)newMethod, <span class="string">"i@:@"</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="如果在-BOOL-resolveInstanceMethod-SEL-sel-中没有找到或者添加方法"><a href="#如果在-BOOL-resolveInstanceMethod-SEL-sel-中没有找到或者添加方法" class="headerlink" title="如果在 + (BOOL)resolveInstanceMethod:(SEL)sel 中没有找到或者添加方法"></a>如果在 <code>+ (BOOL)resolveInstanceMethod:(SEL)sel</code> 中没有找到或者添加方法</h3><p>消息继续往下传递到 <code>- (id)forwardingTargetForSelector:(SEL)aSelector</code> 看看是不是有对象可以执行这个方法，我们来重新建个工程，然后新建一个叫 <code>SecondViewController</code> 的类，里面有一个 <code>- (void)secondVCMethod</code> 方法，如下<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  SecondViewController.m</span></div><div class="line"><span class="comment">//  RuntimeTest2</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 15/12/24.</span></div><div class="line"><span class="comment">//  Copyright © 2015年  www.igancao.com All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"SecondViewController.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SecondViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">SecondViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="comment">// Do any additional setup after loading the view.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)secondVCMethod &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"This is secondVC method !"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">#pragma mark - Navigation</div><div class="line"></div><div class="line">// In a storyboard-based application, you will often want to do a little preparation before navigation</div><div class="line">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender &#123;</div><div class="line">    // Get the new view controller using [segue destinationViewController].</div><div class="line">    // Pass the selected object to the new view controller.</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>  工程结构应该是这样的<br><img src="http://upload-images.jianshu.io/upload_images/571495-43e75b645ee60124.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="工程目录图"><br>现在我想在 <code>ViewController</code> 中调用 <code>- (void)secondVCMethod</code> 这个方法，我们知道 <code>ViewController</code>和 <code>SecondViewController</code> 并无继承关系，按照正常的步骤去做程序肯定会因为在 <code>ViewController</code> 找不到 <code>- (void)secondVCMethod</code> 这个方法而直接崩溃的<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  ViewController.m</span></div><div class="line"><span class="comment">//  RuntimeTest2</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 15/12/24.</span></div><div class="line"><span class="comment">//  Copyright © 2015年 www.igancao.com  All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">     [<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(secondVCMethod)];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">**2015-12-24 13:54:44.314 RuntimeTest2[3164:835814] -[ViewController secondVCMethod]: unrecognized selector sent to instance 0x7fc3a8535c10**</div><div class="line">**2015-12-24 13:54:44.317 RuntimeTest2[3164:835814] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[ViewController secondVCMethod]: unrecognized selector sent to instance 0x7fc3a8535c10'**</div><div class="line">***** First throw call stack:**</div></pre></td></tr></table></figure></p>
+<p>现在我们来处理一下这个消息，如下<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  ViewController.m</span></div><div class="line"><span class="comment">//  RuntimeTest2</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 15/12/24.</span></div><div class="line"><span class="comment">//  Copyright © 2015年 www.igancao.com All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">     [<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(secondVCMethod)];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">id</span>)forwardingTargetForSelector:(SEL)aSelector &#123;</div><div class="line">    Class <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">@"SecondViewController"</span>);</div><div class="line">    <span class="built_in">UIViewController</span> *vc = <span class="keyword">class</span>.new;</div><div class="line">    <span class="keyword">if</span> (aSelector == <span class="built_in">NSSelectorFromString</span>(<span class="string">@"secondVCMethod"</span>)) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"secondVC do this !"</span>);</div><div class="line">        <span class="keyword">return</span> vc;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> [<span class="keyword">super</span> resolveInstanceMethod:sel];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">**<span class="number">2015</span><span class="number">-12</span><span class="number">-24</span> <span class="number">14</span>:<span class="number">00</span>:<span class="number">34.168</span> RuntimeTest2[<span class="number">3284</span>:<span class="number">870957</span>] secondVC <span class="keyword">do</span> <span class="keyword">this</span> !**</div><div class="line">**<span class="number">2015</span><span class="number">-12</span><span class="number">-24</span> <span class="number">14</span>:<span class="number">00</span>:<span class="number">34.169</span> RuntimeTest2[<span class="number">3284</span>:<span class="number">870957</span>] This is secondVC method !**</div></pre></td></tr></table></figure></p>
+<p>我们会发现<code>- (void)secondVCMethod</code>这个方法执行了，程序也并没有崩溃，原因就是在这一步<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)forwardingTargetForSelector:(SEL)aSelector &#123;</div><div class="line">    Class <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">@"SecondViewController"</span>);</div><div class="line">    <span class="built_in">UIViewController</span> *vc = <span class="keyword">class</span>.new;</div><div class="line">    <span class="keyword">if</span> (aSelector == <span class="built_in">NSSelectorFromString</span>(<span class="string">@"secondVCMethod"</span>)) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"secondVC do this !"</span>);</div><div class="line">        <span class="keyword">return</span> vc;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在没有找到 <code>- (void)secondVCMethod</code> 这个方法的时候，消息继续传递，直到 <code>- (id)forwardingTargetForSelector:(SEL)aSelector</code> ，然后我在里面创建了一个<code>SecondViewController</code>的对象，并且判断如果有这个方法，就返回 <code>SecondViewController</code> 的对象。这个函数就是消息的转发，在这儿我们成功的把消息传给了 <code>SecondViewController</code> ，然后让它来执行，所以就执行了那个方法。同时，也相当于完成了一个多继承！</p>
+<h2 id="最后一点"><a href="#最后一点" class="headerlink" title="最后一点"></a>最后一点</h2><p>当然，还有好几个函数，在上面那张图里面已经清晰的表达了，有兴趣的可以自己试试，看看消息的传递顺序到底是怎么样的。上面提到的这些只是 <code>runtime</code> 的冰山一角，<code>runtime</code> 黑魔法的强大远不止于此，比如方法的调配（<code>Method Swizzling</code>）等，在项目实战中还是很有用的，后面有时间会再介绍.<br><div class="note info"><p>参考：<br><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Reference/ObjCRuntimeRef/index.html" target="_blank" rel="external">Objective-C Runtime  Reference</a><br><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Introduction/Introduction.html" target="_blank" rel="external">Objective-C Runtime Programming Guide</a></p>
+</div></p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

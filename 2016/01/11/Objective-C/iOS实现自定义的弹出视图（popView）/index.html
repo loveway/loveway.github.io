@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      iOS 实现自定义的弹出视图（popView） | HenryCheng 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="HenryCheng">
+    
+    
+
+    <meta name="description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
+<meta name="keywords" content="iOS, popView, 弹出视图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 实现自定义的弹出视图（popView） | HenryCheng">
+<meta property="og:url" content="https://clearloveway.com/2016/01/11/Objective-C/iOS实现自定义的弹出视图（popView）/index.html">
+<meta property="og:site_name" content="HenryCheng">
+<meta property="og:description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-3d909ad023b875b3.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2017-11-08T09:12:00.396Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 实现自定义的弹出视图（popView） | HenryCheng">
+<meta name="twitter:description" content="前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/571495-3d909ad023b875b3.gif?imageMogr2/auto-orient/strip">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">HenryCheng</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          那时我们有梦，关于文学，关于爱情，关于穿越世界的旅行  如今我们深夜饮酒，杯子碰到一起，都是梦破碎的声音。
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">iOS 实现自定义的弹出视图（popView）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-01-11" class="post-meta__date date">2016-01-11</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Objective-C/">Objective-C</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/iOS/">iOS</a>, <a class="tags-link" href="/tags/popView/">popView</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>前段时间，在项目中有个需求是支付完成后，弹出红包，实现这么一个发红包的功能。做了最后，实现的效果大致如下<a id="more"></a>：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/571495-3d909ad023b875b3.gif?imageMogr2/auto-orient/strip" alt="效果图"></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>整个 <code>ViewController</code> 的代码大致如下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  SecondViewController.m</span></div><div class="line"><span class="comment">//  HWPopTool</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 16/1/11.</span></div><div class="line"><span class="comment">//  Copyright © 2016年 www.igancao.com. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"SecondViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"HWPopTool.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SecondViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIView</span> *contentView;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">SecondViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="keyword">self</span>.view.backgroundColor = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">    </div><div class="line">    _contentView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">300</span>)];</div><div class="line">    _contentView.backgroundColor = [<span class="built_in">UIColor</span> clearColor];</div><div class="line">    </div><div class="line">    <span class="built_in">UIButton</span> *btn = [<span class="built_in">UIButton</span> buttonWithType:<span class="built_in">UIButtonTypeCustom</span>];</div><div class="line">    btn.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">50</span>);</div><div class="line">    btn.backgroundColor = [<span class="built_in">UIColor</span> greenColor];</div><div class="line">    [btn addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(popViewShow) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</div><div class="line">    [<span class="keyword">self</span>.view addSubview:btn];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)popViewShow &#123;</div><div class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:_contentView.bounds];</div><div class="line">    imageV.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"jei"</span>];</div><div class="line">    [_contentView addSubview:imageV];</div><div class="line">    </div><div class="line">    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;</div><div class="line">    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;</div><div class="line">    [[HWPopTool sharedInstance] showWithPresentView:_contentView animated:<span class="literal">YES</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>我们引入了 <code>HWPopTool.h</code> ，并且创建了一个 <code>button</code> ，点击 <code>button</code> 的方法是 <code>popViewShow</code> ，我们来看一下这里面的代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)popViewShow &#123;</div><div class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:_contentView.bounds];</div><div class="line">    imageV.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"jei"</span>];</div><div class="line">    [_contentView addSubview:imageV];</div><div class="line">    </div><div class="line">    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;</div><div class="line">    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;</div><div class="line">    [[HWPopTool sharedInstance] showWithPresentView:_contentView animated:<span class="literal">YES</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里在 _contentView 上放了一个 imageView ，然后我们设置了 shadeBackgroundType 和 closeButtonType 以后，下面一句代码就是展示出来 popView  。<br>这里主要就是我们弹出一个 <code>view</code> ，至于这个 <code>view</code> 多大，上面放什么，都是由你自己决定的。</p>
+<h2 id="关于HWPopTool里面的一些属性和方法"><a href="#关于HWPopTool里面的一些属性和方法" class="headerlink" title="关于HWPopTool里面的一些属性和方法"></a>关于<code>HWPopTool</code>里面的一些属性和方法</h2><p>先来看一下 <code>HWPopTool.h</code><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  HWPopTool.h</span></div><div class="line"><span class="comment">//  HWPopTool</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by HenryCheng on 16/1/11.</span></div><div class="line"><span class="comment">//  Copyright © 2016年 www.igancao.com. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"><span class="comment">/**</span></div><div class="line"> *  关闭按钮的位置</div><div class="line"> */</div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, ButtonPositionType) &#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  无</div><div class="line">     */</div><div class="line">    ButtonPositionTypeNone = <span class="number">0</span>,</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  左上角</div><div class="line">     */</div><div class="line">    ButtonPositionTypeLeft = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  右上角</div><div class="line">     */</div><div class="line">    ButtonPositionTypeRight = <span class="number">2</span> &lt;&lt; <span class="number">0</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *  蒙板的背景色</div><div class="line"> */</div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, ShadeBackgroundType) &#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  渐变色</div><div class="line">     */</div><div class="line">    ShadeBackgroundTypeGradient = <span class="number">0</span>,</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  固定色</div><div class="line">     */</div><div class="line">    ShadeBackgroundTypeSolid = <span class="number">1</span> &lt;&lt; <span class="number">0</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^completeBlock)(<span class="keyword">void</span>);</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">HWPopTool</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIColor</span> *popBackgroudColor;<span class="comment">//弹出视图的背景色</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">BOOL</span> tapOutsideToDismiss;<span class="comment">//点击蒙板是否弹出视图消失</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) ButtonPositionType closeButtonType;<span class="comment">//关闭按钮的类型</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) ShadeBackgroundType shadeBackgroundType;<span class="comment">//蒙板的背景色</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> *  创建一个实例</div><div class="line"> *</div><div class="line"> *  @return CHWPopTool</div><div class="line"> */</div><div class="line">+ (HWPopTool *)sharedInstance;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *  弹出要展示的View</div><div class="line"> *</div><div class="line"> *  @param presentView show View</div><div class="line"> *  @param animated    是否动画</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)showWithPresentView:(<span class="built_in">UIView</span> *)presentView animated:(<span class="built_in">BOOL</span>)animated;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *  关闭弹出视图</div><div class="line"> *</div><div class="line"> *  @param complete complete block</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)closeWithBlcok:(<span class="keyword">void</span>(^)())complete;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>由于之前写的比较仓促，今天趁着空余时间又把代码整理了一遍，比如关闭之后的回调，之前用 <code>delegate</code> 实现的，今天又用 <code>block</code> 重新写的，简洁一点吧，另外基本上所有的方法、属性、枚举我都有注释，算是个个人习惯吧。<br>这里面有几点需要说明的是：</p>
+<ul>
+<li>1.<code>ShadeBackgroundType</code>是蒙板的背景色属性，有固定的和渐变的（<code>ShadeBackgroundTypeGradient</code>），关于这个渐变，有兴趣的可以研究一下<code>CAGradientLayer</code>，还是很有趣的，在后来的文章中也会说到。</li>
+<li>2.<code>tapOutsideToDismiss</code> 这个是设置点击蒙板，<code>popView</code> 消失不消失的属性，默认的是 <code>YES</code></li>
+<li>3.<code>- (void)closeWithBlcok:(void(^)())complete</code> 这个方法，是关闭后的回调，比如说发送红包以后，等 <code>popView</code> 消失以后回到上一页的这种。</li>
+</ul>
+<p>由于注释的基本都很清楚了，这里就不多说了，</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我一般写博客的时候，贴代码喜欢贴全部的代码，我认为这样会直观一点（当然非常多的除外），最后，所有的代码 <code>demo</code> 都可以在 <a href="https://github.com/Loveway/HWPopTool" target="_blank" rel="external"><em>这里</em></a>  看到！</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
