@@ -93,13 +93,13 @@
 
 
 
-<meta name="description" content="一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。万事开头难！其实在开始重构之前，我是很纠结的，一直很难开始。我也曾翻阅">
+<meta name="description" content="一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。">
 <meta name="keywords" content="runtime,Objective-C,架构,MVVM,AOP,MVC#文章关键词，多个关键词用英文逗号隔开">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谈谈关于 iOS 的架构以及应用）">
 <meta property="og:url" content="https://clearloveway.com/2019/04/26/Objective-C/谈谈关于 iOS 的架构以及应用/index.html">
 <meta property="og:site_name" content="HenryCheng">
-<meta property="og:description" content="一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。万事开头难！其实在开始重构之前，我是很纠结的，一直很难开始。我也曾翻阅">
+<meta property="og:description" content="一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/571495-02c6a47bfe3929bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/571495-ba8aafb9b6ee9f2c.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/571495-1b0046055ae5f591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
@@ -110,10 +110,10 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/571495-7266e553fb684eca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/571495-9a5842cdb3df69ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/571495-890de93f4b4014e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-04-26T02:12:13.570Z">
+<meta property="og:updated_time" content="2019-04-26T02:13:32.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈关于 iOS 的架构以及应用）">
-<meta name="twitter:description" content="一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。万事开头难！其实在开始重构之前，我是很纠结的，一直很难开始。我也曾翻阅">
+<meta name="twitter:description" content="一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/571495-02c6a47bfe3929bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -373,7 +373,7 @@
       
 
       
-        <p> 一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 <a href="https://flutter.dev/" target="_blank" rel="external">Flutter</a> 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 <a href="https://www.igancao.com/" target="_blank" rel="external">甘草医生</a> 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。<br>万事开头难！其实在开始重构之前，我是很纠结的，一直很难开始。我也曾翻阅过很多资料，想找到一个合适的符合我们自己目前业务的架构，最后做了种种的比对与测试，选择了 <code>MVVM + 组件化 + AOP</code> 的模式来重构。可能有人会疑问，你为什么选择这样的架构模式？使用这些模式有什么好处？这些抽象的模式概念具体应该怎么在实际项目中运用？OK，那我们就带着这些疑问一步步往下看。</p>
+        <p> 一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 <a href="https://flutter.dev/" target="_blank" rel="external">Flutter</a> 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 <a href="https://www.igancao.com/" target="_blank" rel="external">甘草医生</a> 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。<a id="more"></a><br>万事开头难！其实在开始重构之前，我是很纠结的，一直很难开始。我也曾翻阅过很多资料，想找到一个合适的符合我们自己目前业务的架构，最后做了种种的比对与测试，选择了 <code>MVVM + 组件化 + AOP</code> 的模式来重构。可能有人会疑问，你为什么选择这样的架构模式？使用这些模式有什么好处？这些抽象的模式概念具体应该怎么在实际项目中运用？OK，那我们就带着这些疑问一步步往下看。</p>
 <h2 id="关于架构模式"><a href="#关于架构模式" class="headerlink" title="关于架构模式"></a>关于架构模式</h2><p> 我们先来了解一下在 iOS 中常用的一些架构模式</p>
 <ul>
 <li><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="external">MVC</a><br>关于 MVC（Model-View-Controller）这个设计模式我相信稍有些编程经验的人都了解至少听说过，作为应用最为广泛的架构模式，大家应该都是耳熟能详了，但是不同的人对 MVC 的理解是不同的。在 iOS 中，Cocoa Touch 框架使用的就是 MVC ，如下</li>
