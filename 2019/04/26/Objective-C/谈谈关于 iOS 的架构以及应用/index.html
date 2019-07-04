@@ -127,7 +127,7 @@
 <meta property="og:image" content="https://github.com/loveway/LearnBlog/blob/master/Notes/Objective-C/image/ar_catalog1.png?raw=true">
 <meta property="og:image" content="https://github.com/loveway/LearnBlog/blob/master/Notes/Objective-C/image/ar_catalog2.png?raw=true">
 <meta property="og:image" content="https://github.com/loveway/LearnBlog/blob/master/Notes/Objective-C/image/ar_catalog3.png?raw=true">
-<meta property="og:updated_time" content="2019-07-04T12:21:56.248Z">
+<meta property="og:updated_time" content="2019-07-04T12:40:10.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈关于 iOS 的架构以及应用">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。">
@@ -448,13 +448,13 @@
         <p>&emsp;&emsp;一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 <a href="https://flutter.dev/" target="_blank" rel="noopener">Flutter</a> 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 <a href="https://www.igancao.com/" target="_blank" rel="noopener">甘草医生</a> 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。<a id="more"></a><br>万事开头难！其实在开始重构之前，我是很纠结的，一直很难开始。我也曾翻阅过很多资料，想找到一个合适的符合我们自己目前业务的架构，最后做了种种的比对与测试，选择了 <code>MVVM + 组件化 + AOP</code> 的模式来重构。可能有人会疑问，你为什么选择这样的架构模式？使用这些模式有什么好处？这些抽象的模式概念具体应该怎么在实际项目中运用？OK，那我们就带着这些疑问一步步往下看。</p>
 <h2 id="一、关于架构模式"><a href="#一、关于架构模式" class="headerlink" title="一、关于架构模式"></a>一、关于架构模式</h2><p>&emsp;&emsp;我们先来了解一下在 iOS 中常用的一些架构模式</p>
 <h5 id="1-MVC"><a href="#1-MVC" class="headerlink" title="1. MVC"></a>1. <a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="noopener">MVC</a></h5><p>&emsp;&emsp;关于 MVC（Model-View-Controller）这个设计模式我相信稍有些编程经验的人都了解至少听说过，作为应用最为广泛的架构模式，大家应该都是耳熟能详了，但是不同的人对 MVC 的理解是不同的。在 iOS 中，Cocoa Touch 框架使用的就是 MVC ，如下</p>
-<center>![mvc](https://github.com/loveway/LearningBlog/blob/master/Notes/Objective-C/image/ar_mvc.png?raw=true)<center>
+<center>![mvc](https://github.com/loveway/LearningBlog/blob/master/Notes/Objective-C/image/ar_mvc.png?raw=true)</center>
 
 <p>这是苹果典型的 MVC 模式，用户通过 View 将交互（点击、滑动等）通知给 Controller，Controller 收到通知后更新 Model，Model 状态改变以后再通知 Controller 来改变他们负责的 View。由于在 iOS 中我们常用的 UIViewController 本身就自带一个 View，所以在 iOS 开发中 Controller  层和 View 层总是紧密的耦合在一起，如果一个页面业务逻辑量大的话，一个视图控制器经常会很多行的代码，导致视图控制器非常的臃肿。<br>可见，MVC 模式虽然能带来简单的业务分层，但是想必各位使用 MVC 模式的 iOSer 们经常会被以下几个问题困扰</p>
 <ol>
-<li>厚重的 ViewController<br>在日常的处理中，我们一般将我们的一些网络请求、数据存储、视图逻辑等一些处理全部扔在我们的 ViewController 里，在业务量大的情况下，一个 ViewController 里面就会有几千行代码</li>
-<li>较差的可测试性<br>对一个有几千甚至上万行的 ViewController 进行单元测试是一个非常难以接受的事情，可以说，谁接到这个任务都是难以接受的</li>
-<li>较差的可读性<br>我相信大家都有接手一个项目然后改 bug 的经历，当你看到一个有 10000 行的代码的 ViewController 的时候，你肯定吐槽过</li>
+<li>厚重的 ViewController<br> 在日常的处理中，我们一般将我们的一些网络请求、数据存储、视图逻辑等一些处理全部扔在我们的 ViewController 里，在业务量大的情况下，一个 ViewController 里面就会有几千行代码</li>
+<li>较差的可测试性<br> 对一个有几千甚至上万行的 ViewController 进行单元测试是一个非常难以接受的事情，可以说，谁接到这个任务都是难以接受的</li>
+<li>较差的可读性<br> 我相信大家都有接手一个项目然后改 bug 的经历，当你看到一个有 10000 行的代码的 ViewController 的时候，你肯定吐槽过</li>
 </ol>
 <h5 id="2-MVVM"><a href="#2-MVVM" class="headerlink" title="2. MVVM"></a>2. <a href="https://zh.wikipedia.org/wiki/MVVM" target="_blank" rel="noopener">MVVM</a></h5><p>&emsp;&emsp;MVVM （Model-View-ViewModel），其实也是基于 MVC 的。上面我们说的 MVC 臃肿的问题，在 MVVM 的架构模式中得到了解决，我们一些常用的网络请求、数据存储等都交给它处理，这样就可以分离出 ViewController 里面的一些代码使其“减肥”。</p>
 <p align="center">
@@ -587,7 +587,7 @@
 <p>7、<a href="https://github.com/alibaba/coobjc/blob/master/README_cn.md" target="_blank" rel="noopener">coobjc</a></p>
 <p>8、<a href="https://guides.cocoapods.org/using/a-gemfile.html" target="_blank" rel="noopener">Using a Gemfile</a></p>
 </blockquote>
-</center></center>
+
       
     </div>
 
