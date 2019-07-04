@@ -110,20 +110,30 @@
 
 
 
-<meta name="description" content="![Go](http://upload-images.jianshu.io/upload_images/571495-70c3e7915ad2de18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)  定义我们都知道在 Go 语言中，数组的长度是不可变的，那么为了更加灵活的处理数据，Go 提供了一种功能强悍的类型切片（slice），sl">
+<meta name="description" content="定义我们都知道在 Go 语言中，数组的长度是不可变的，那么为了更加灵活的处理数据，Go 提供了一种功能强悍的类型切片（slice），slice 可以理解为 “动态数组”。但是 slice 并不是真正意义上的动态数组，而是一个引用类型。slice 总是指向一个底层 array，slice 的声明也可以像 array 一样，只是不需要长度。slice 的声明和数组类似，如下">
 <meta name="keywords" content="slice,切片,Go">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go 中 slice 的那些事">
 <meta property="og:url" content="https://www.clearloveway.com/2017/11/08/Go/Go 中 slice 的那些事/index.html">
 <meta property="og:site_name" content="HenryCheng">
-<meta property="og:description" content="![Go](http://upload-images.jianshu.io/upload_images/571495-70c3e7915ad2de18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)  定义我们都知道在 Go 语言中，数组的长度是不可变的，那么为了更加灵活的处理数据，Go 提供了一种功能强悍的类型切片（slice），sl">
+<meta property="og:description" content="定义我们都知道在 Go 语言中，数组的长度是不可变的，那么为了更加灵活的处理数据，Go 提供了一种功能强悍的类型切片（slice），slice 可以理解为 “动态数组”。但是 slice 并不是真正意义上的动态数组，而是一个引用类型。slice 总是指向一个底层 array，slice 的声明也可以像 array 一样，只是不需要长度。slice 的声明和数组类似，如下">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-70c3e7915ad2de18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/220">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-4fdb7e1b2f7b7707.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
-<meta property="og:updated_time" content="2017-11-08T10:20:57.637Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-c4d0c74009ecd930.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-a011d8b2d2aa0b26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-5edc429446adc268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-01444240896f17a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-60d34400ca09c1c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-d0758d9aef746c16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-94b2fac8482da167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-2f02ecdf921639fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/571495-b47540184be2e4c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-07-04T12:47:11.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go 中 slice 的那些事">
-<meta name="twitter:description" content="![Go](http://upload-images.jianshu.io/upload_images/571495-70c3e7915ad2de18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)  定义我们都知道在 Go 语言中，数组的长度是不可变的，那么为了更加灵活的处理数据，Go 提供了一种功能强悍的类型切片（slice），sl">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/571495-4fdb7e1b2f7b7707.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
+<meta name="twitter:description" content="定义我们都知道在 Go 语言中，数组的长度是不可变的，那么为了更加灵活的处理数据，Go 提供了一种功能强悍的类型切片（slice），slice 可以理解为 “动态数组”。但是 slice 并不是真正意义上的动态数组，而是一个引用类型。slice 总是指向一个底层 array，slice 的声明也可以像 array 一样，只是不需要长度。slice 的声明和数组类似，如下">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/571495-70c3e7915ad2de18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/220">
 
 
 
@@ -404,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2.7k
+                  2.5k
                 </span>
               
 
@@ -420,7 +430,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  12
+                  10
                 </span>
               
             </div>
@@ -437,7 +447,9 @@
       
 
       
-        <center>![Go](http://upload-images.jianshu.io/upload_images/571495-70c3e7915ad2de18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)</center>
+        <p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-70c3e7915ad2de18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/220">
+</p>
 
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>我们都知道在 Go 语言中，数组的长度是不可变的，那么为了更加灵活的处理数据，Go 提供了一种功能强悍的类型切片（slice），slice 可以理解为 “动态数组”。但是 slice 并不是真正意义上的动态数组，而是一个引用类型。slice 总是指向一个底层 array，slice 的声明也可以像 array 一样，只是不需要长度。slice 的声明和数组类似，如下<a id="more"></a></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iSlice []<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
@@ -448,7 +460,12 @@
 <p>还有一种声明的方法是使用 make() 函数，如下</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slice1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 
-<p>用 make() 函数创建的时候有三个参数，<code>make(type, len[, cap])</code> ，依次是类型、长度、容量。<br><img src="http://upload-images.jianshu.io/upload_images/571495-4fdb7e1b2f7b7707.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770" alt="slice1"><br>如图所示，上图表示创建了 slice1 ，长度是 5，默认的值都是 0，容量是 10，这样声明就开辟了一块容量是 10 的连续的一块内存。当然如果我们不指定容量也是可以的，如下</p>
+<p>用 make() 函数创建的时候有三个参数，<code>make(type, len[, cap])</code> ，依次是类型、长度、容量。</p>
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-4fdb7e1b2f7b7707.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
+</p>
+
+<p>如图所示，上图表示创建了 slice1 ，长度是 5，默认的值都是 0，容量是 10，这样声明就开辟了一块容量是 10 的连续的一块内存。当然如果我们不指定容量也是可以的，如下</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slice2 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
 
 <p>这样就会根据实际情况动态分配内存，而不是最开始指定一块固定大小的内存。需要注意的是我们一般使用 make() 函数来创建 slice，因为我们可以指定 slice 的容量，这样在最开始创建的时候就分配好空间，避免数据多次改变导致多次重新改变 cap 分配空间带来不必要的开销。</p>
@@ -456,10 +473,11 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	aSlice := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"aSlice length = %d, cap = %d, self = %v\n"</span>, <span class="built_in">len</span>(aSlice), <span class="built_in">cap</span>(aSlice), aSlice)</span><br><span class="line">	aSlice = <span class="built_in">append</span>(aSlice, <span class="number">6</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"aSlice length= %d, cap = %d, self = %v"</span>, <span class="built_in">len</span>(aSlice), <span class="built_in">cap</span>(aSlice), aSlice)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个时候我们运行，控制台打印</p>
-<div align="center">![print](http://upload-images.jianshu.io/upload_images/571495-c4d0c74009ecd930.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div>
-我们会看到 aSlice 进行 append 操作以后，它的容量增加了一倍，cap 并没有变成我们想象中的 6 ，而是变成了 10
-![aSlice](http://upload-images.jianshu.io/upload_images/571495-a011d8b2d2aa0b26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770)
-如果我们最开始 slice 的容量是 10，长度是 5 ，那么再加一个元素是不会改变切片的容量的。也就是说，当我们往 slice中增加元素超过原来的容量时，slice 会自增容量，当现有长度 < 1024 时 cap 增长是翻倍的，当超过 1024，cap 的增长是 1.25 倍增长。我们来看一下 [slice.go](https://github.com/golang/go/blob/master/src/runtime/slice.go) 的源码会发现有这样一个函数，里面说明了 cap 的增长规则
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-c4d0c74009ecd930.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+</p>
+
+<p>我们会看到 aSlice 进行 append 操作以后，它的容量增加了一倍，cap 并没有变成我们想象中的 6 ，而是变成了 10<br><img src="http://upload-images.jianshu.io/upload_images/571495-a011d8b2d2aa0b26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770" alt="aSlice"><br>如果我们最开始 slice 的容量是 10，长度是 5 ，那么再加一个元素是不会改变切片的容量的。也就是说，当我们往 slice中增加元素超过原来的容量时，slice 会自增容量，当现有长度 &lt; 1024 时 cap 增长是翻倍的，当超过 1024，cap 的增长是 1.25 倍增长。我们来看一下 <a href="https://github.com/golang/go/blob/master/src/runtime/slice.go" target="_blank" rel="noopener">slice.go</a> 的源码会发现有这样一个函数，里面说明了 cap 的增长规则</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">growslice</span><span class="params">(et *_type, old slice, <span class="built_in">cap</span> <span class="keyword">int</span>)</span> <span class="title">slice</span></span> &#123;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    ....省略....</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line">	newcap := old.<span class="built_in">cap</span></span><br><span class="line">	doublecap := newcap + newcap</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">cap</span> &gt; doublecap &#123;</span><br><span class="line">		newcap = <span class="built_in">cap</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> old.<span class="built_in">len</span> &lt; <span class="number">1024</span> &#123;</span><br><span class="line">			newcap = doublecap</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// Check 0 &lt; newcap to detect overflow</span></span><br><span class="line">			<span class="comment">// and prevent an infinite loop.</span></span><br><span class="line">			<span class="keyword">for</span> <span class="number">0</span> &lt; newcap &amp;&amp; newcap &lt; <span class="built_in">cap</span> &#123;</span><br><span class="line">				newcap += newcap / <span class="number">4</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// Set newcap to the requested cap when</span></span><br><span class="line">			<span class="comment">// the newcap calculation overflowed.</span></span><br><span class="line">			<span class="keyword">if</span> newcap &lt;= <span class="number">0</span> &#123;</span><br><span class="line">				newcap = <span class="built_in">cap</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    ....省略....</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>从上面的源码，在对 slice 进行 append 等操作时，可能会造成 slice 的自动扩容。其扩容时的大小增长规则是：</p>
@@ -472,30 +490,45 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	aSlice := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">	bSlice := <span class="built_in">append</span>(aSlice, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"a %v , cap = %d, len = %d\n"</span>, aSlice, <span class="built_in">cap</span>(aSlice), <span class="built_in">len</span>(aSlice))</span><br><span class="line">	fmt.Printf(<span class="string">"b %v , cap = %d, len = %d\n"</span>, bSlice, <span class="built_in">cap</span>(bSlice), <span class="built_in">len</span>(bSlice))</span><br><span class="line">	aSlice[<span class="number">0</span>] = <span class="number">6</span></span><br><span class="line">	fmt.Printf(<span class="string">"a %v , cap = %d, len = %d\n"</span>, aSlice, <span class="built_in">cap</span>(aSlice), <span class="built_in">len</span>(aSlice))</span><br><span class="line">	fmt.Printf(<span class="string">"b %v , cap = %d, len = %d"</span>, bSlice, <span class="built_in">cap</span>(bSlice), <span class="built_in">len</span>(bSlice))</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们会看到控制台输出</p>
-<div align="center">![print](http://upload-images.jianshu.io/upload_images/571495-5edc429446adc268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div>
-变化过程如下图所示
-![slice变化](http://upload-images.jianshu.io/upload_images/571495-01444240896f17a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770)
-上面说明，在 slice 的 cap 范围内增加元素， slice 只会发生 len 的变化不会发生 cap 的变化，同样也说明 slice 实际上是指向一个底层的数组，当多个 slice 指向同一个底层数组的时候，其中一个改变，其余的也会跟着改变，这里需要注意一下。我们同样从 [slice.go](https://github.com/golang/go/blob/master/src/runtime/slice.go) 的源码中 slice 的定义可以看出，
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-5edc429446adc268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+</p>
+
+<p>变化过程如下图所示</p>
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-01444240896f17a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
+</p>
+
+<p>上面说明，在 slice 的 cap 范围内增加元素， slice 只会发生 len 的变化不会发生 cap 的变化，同样也说明 slice 实际上是指向一个底层的数组，当多个 slice 指向同一个底层数组的时候，其中一个改变，其余的也会跟着改变，这里需要注意一下。我们同样从 <a href="https://github.com/golang/go/blob/master/src/runtime/slice.go" target="_blank" rel="noopener">slice.go</a> 的源码中 slice 的定义可以看出，</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">	array unsafe.Pointer</span><br><span class="line">	<span class="built_in">len</span>   <span class="keyword">int</span></span><br><span class="line">	<span class="built_in">cap</span>   <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这里关于底层的东西就不多叙述，有兴趣的可以看看 <a href="http://www.jianshu.com/u/12201cdd5d7a" target="_blank" rel="noopener">一缕殇流化隐半边冰霜</a> 冰霜的 <a href="http://www.jianshu.com/p/030aba2bff41" target="_blank" rel="noopener">深入解析 Go 中 Slice 底层实现</a> 这篇文章，对 slice 的底层实现的讲解。接下来我们把上面的代码改变一下</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	aSlice := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">	bSlice := <span class="built_in">append</span>(aSlice, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"a %v , cap = %d, len = %d\n"</span>, aSlice, <span class="built_in">cap</span>(aSlice), <span class="built_in">len</span>(aSlice))</span><br><span class="line">	fmt.Printf(<span class="string">"b %v , cap = %d, len = %d\n"</span>, bSlice, <span class="built_in">cap</span>(bSlice), <span class="built_in">len</span>(bSlice))</span><br><span class="line">	aSlice[<span class="number">0</span>] = <span class="number">6</span></span><br><span class="line">	fmt.Printf(<span class="string">"a %v , cap = %d, len = %d\n"</span>, aSlice, <span class="built_in">cap</span>(aSlice), <span class="built_in">len</span>(aSlice))</span><br><span class="line">	fmt.Printf(<span class="string">"b %v , cap = %d, len = %d"</span>, bSlice, <span class="built_in">cap</span>(bSlice), <span class="built_in">len</span>(bSlice))</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们可以看到下面的输出</p>
-<center>![改变后的 print](http://upload-images.jianshu.io/upload_images/571495-60d34400ca09c1c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</center>
-上面代码可以用下图说明
-![slice append](http://upload-images.jianshu.io/upload_images/571495-d0758d9aef746c16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770)
-也就是说，当 append 的数据超过原来的容量以后，就会重新分配一块新的内存，并把原来的数据 copy 过来，并且保留原来的空间，供原来的 slice（aSlice） 使用这样 aSlice 和 bSlice 就各自指向不同的地址，当 aSlice 改变时，bSlice 不会改变。
-关于 cap 还有一点需要注意，我们来用一个例子说明
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-60d34400ca09c1c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+</p>
+
+<p>上面代码可以用下图说明</p>
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-d0758d9aef746c16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/770">
+</p>
+
+<p>也就是说，当 append 的数据超过原来的容量以后，就会重新分配一块新的内存，并把原来的数据 copy 过来，并且保留原来的空间，供原来的 slice（aSlice） 使用这样 aSlice 和 bSlice 就各自指向不同的地址，当 aSlice 改变时，bSlice 不会改变。<br>关于 cap 还有一点需要注意，我们来用一个例子说明</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	Array_a := [<span class="number">10</span>]<span class="keyword">byte</span>&#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>&#125;</span><br><span class="line">	Slice_a := Array_a[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line">	Slice_b := Slice_a[<span class="number">6</span>:<span class="number">7</span>]</span><br><span class="line">	fmt.Printf(<span class="string">"Slice_a %v , cap = %d, len = %d\n"</span>, <span class="keyword">string</span>(Slice_a), <span class="built_in">cap</span>(Slice_a), <span class="built_in">len</span>(Slice_a))</span><br><span class="line">	fmt.Printf(<span class="string">"Slice_b %v , cap = %d, len = %d\n"</span>, <span class="keyword">string</span>(Slice_b), <span class="built_in">cap</span>(Slice_b), <span class="built_in">len</span>(Slice_b))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>控制台打印</p>
-<center>![reslice print](http://upload-images.jianshu.io/upload_images/571495-94b2fac8482da167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</center>
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-94b2fac8482da167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+</p>
 
 <p>这里我们会发现 Slice_b 对 Slice_a 进行重新切片后，并没有报错，而是还有输出，这是因为 Slice_a 的 cap 是 8 ，并不是我们想象的 3，slice 指向的是一块连续的内存，所以 Slice_a 的容量其实是一直到 Array_a 的最后的。所以这里 Array_b 对 Array_a 进行切片后会得到值，<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/02.2.md" target="_blank" rel="noopener">《Go Web 编程》</a> 上这张图形象的解释了对数组的切片结果，这里是需要注意的一个点。</p>
-<center>![slice](http://upload-images.jianshu.io/upload_images/571495-2f02ecdf921639fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</center>
-## 关于 copy
-我们来看下面代码
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-2f02ecdf921639fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+</p>
+
+<h2 id="关于-copy"><a href="#关于-copy" class="headerlink" title="关于 copy"></a>关于 copy</h2><p>我们来看下面代码</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	aSlice := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	bSlice := []<span class="keyword">int</span>&#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line">	<span class="built_in">copy</span>(bSlice, aSlice)</span><br><span class="line">	fmt.Println(aSlice, bSlice)<span class="comment">//[1 2 3] [1 2 3 7 8 9]</span></span><br><span class="line">       <span class="comment">//如果是 copy( aSlice, bSlice) 则结果是 [4 5 6] </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>也就是说 copy() 函数有两个参数，一个是 to 一个是 from，就是将第二个 copy 到第一个上面，如果第一个长度小于第二个，那么就会 copy 与第一个等长度的值，如 copy( aSlice, bSlice) 的结果是 [4 5 6] ，反之则是短的覆盖长的前几位。当然我们也可以指定复制长度</p>
@@ -511,13 +544,16 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	s := <span class="string">"hello"</span></span><br><span class="line">	c := []<span class="keyword">byte</span>(s) <span class="comment">// 将字符串 s 转换为 []byte 类型</span></span><br><span class="line">	c[<span class="number">0</span>] = <span class="string">'c'</span></span><br><span class="line">	s2 := <span class="keyword">string</span>(c) <span class="comment">// 再转换回 string 类型</span></span><br><span class="line">	fmt.Printf(<span class="string">"%s\n"</span>, s2)</span><br><span class="line">	fmt.Printf(<span class="string">"s-%x, c-%x, s2-%x"</span>, &amp;s, &amp;c, &amp;s2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>控制台输出</p>
-<center>![字符串改变](http://upload-images.jianshu.io/upload_images/571495-b47540184be2e4c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</center>
-在 Go 中字符串是不可以改变的，我们可以用上面的方法来改变字符串，这里可以看到是实现了 string 和 []byte 的互相转换，达到了修改 string 的目的。我们去看看 [string.go](https://github.com/golang/go/blob/master/src/runtime/string.go) 的源码会发现，有下面的方法
+<p align="center">
+<img src="http://upload-images.jianshu.io/upload_images/571495-b47540184be2e4c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+</p>
+
+<p>在 Go 中字符串是不可以改变的，我们可以用上面的方法来改变字符串，这里可以看到是实现了 string 和 []byte 的互相转换，达到了修改 string 的目的。我们去看看 <a href="https://github.com/golang/go/blob/master/src/runtime/string.go" target="_blank" rel="noopener">string.go</a> 的源码会发现，有下面的方法</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">stringtoslicebyte</span><span class="params">(buf *tmpBuf, s <span class="keyword">string</span>)</span> []<span class="title">byte</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> b []<span class="keyword">byte</span></span><br><span class="line">	<span class="keyword">if</span> buf != <span class="literal">nil</span> &amp;&amp; <span class="built_in">len</span>(s) &lt;= <span class="built_in">len</span>(buf) &#123;</span><br><span class="line">		*buf = tmpBuf&#123;&#125;</span><br><span class="line">		b = buf[:<span class="built_in">len</span>(s)]</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		b = rawbyteslice(<span class="built_in">len</span>(s))</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">copy</span>(b, s)</span><br><span class="line">	<span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以看到上面有个 copy(b, s) ，这里就是将 string 复制到 []byte 上，在 slice.go 已经实现过了的。从源码中我们也可以看出每次 b 都是重新分配的，然后将 s 复制 给 b，从我们上面程控制台输出也可以看到每次地址都有变化，所以说 string 和 []byte 的相互转换是有内存开销的，不过对于现在的机器来说，这点开销也不算什么。</p>
 <p>最后，这是我学习 Go 的 slice 的一些理解与总结，由于能力有限，如果有理解不到位的地方，可以随时留言与我交流。</p>
-<div class="note info"><p>参考:<br>1、<strong><a href="https://github.com/astaxie/build-web-application-with-golang" target="_blank" rel="noopener">build-web-application-with-golang</a></strong><br>2、<strong><a href="https://github.com/golang/go" target="_blank" rel="noopener">go</a></strong></p>
+<div class="note info"><p>Reference:<br>1、<strong><a href="https://github.com/astaxie/build-web-application-with-golang" target="_blank" rel="noopener">build-web-application-with-golang</a></strong><br>2、<strong><a href="https://github.com/golang/go" target="_blank" rel="noopener">go</a></strong></p>
 </div>
 
 
@@ -762,7 +798,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slice-的特性"><span class="nav-number">2.</span> <span class="nav-text">slice 的特性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slice-的特性"><span class="nav-number">2.</span> <span class="nav-text">slice 的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-copy"><span class="nav-number">3.</span> <span class="nav-text">关于 copy</span></a></li></ol></div>
             
 
           </div>
@@ -817,7 +853,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">全站共 28.1k 字</span>
+  <span class="post-count">全站共 27.9k 字</span>
 </div>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
