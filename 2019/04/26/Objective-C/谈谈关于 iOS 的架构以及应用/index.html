@@ -138,7 +138,7 @@
 <meta property="og:image" content="https://github.com/loveway/LearnBlog/blob/master/Notes/Objective-C/image/ar_catalog1.png?raw=true">
 <meta property="og:image" content="https://github.com/loveway/LearnBlog/blob/master/Notes/Objective-C/image/ar_catalog2.png?raw=true">
 <meta property="og:image" content="https://github.com/loveway/LearnBlog/blob/master/Notes/Objective-C/image/ar_catalog3.png?raw=true">
-<meta property="og:updated_time" content="2019-07-05T05:18:13.261Z">
+<meta property="og:updated_time" content="2019-07-05T05:27:59.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈关于 iOS 的架构以及应用">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;一直以来想写一篇文章，但是没找到合适的主题，前段时间一直在看 Flutter 的一些东西，本来有意向想写关于 Flutter 的一些总结，但是看的有些零零散散，并且没有实际应用过，所以也就搁置了。正好最近一段时间除主业务之余，一直在做我们 甘草医生 用户端的重构，刚好有一些对于 iOS 架构方面的看法与感悟，在这里与大家分享。">
@@ -560,10 +560,8 @@
 
 <p>这样代码看起来很清晰，相信大家都有过一打开 <code>AppDelegate</code> 这个类看到一大堆代码，东找西找很不规范的经历。由于是项目重构初期，<code>AppDelegate</code> 和 <code>AppDelegate+Config</code> 使用的比较多，暂时先放在这里，后期再将其移动到合适的位置。</p>
 <h3 id="3、CocoaPods-的使用"><a href="#3、CocoaPods-的使用" class="headerlink" title="3、CocoaPods 的使用"></a>3、<a href="https://cocoapods.org/" target="_blank" rel="noopener">CocoaPods</a> 的使用</h3><p>&emsp;&emsp;相信这个东西大家都用过，为什么要强调一下 CocoaPods 的使用，因为在我整理之前项目时发现，有的地方（比如微信支付、支付宝支付）就是直接将 lib 直接拖进工程，有的还需要各种配置，这样如果升级或者移除的时候就很麻烦。使用 CocoaPods 管理的话那么升级或者移除就很方便，所以建议还是能使用 CocoaPods 安装的就直接使用其安装，最好不要直接在项目中添加第三方。<br>&emsp;&emsp;还有一种情况就是有时候第三方满足不了我们的需求，需要修改一下，所以有些就不集成在 CocoaPods 里面了（万一一不小心 update 以后修改的内容被覆盖）。这里我想说的是，对于这种情况你仍然可以使用 CocoaPods，那么怎么解决需要修改代码的问题？没错，就是 Category ！</p>
-<blockquote>
-<p>Tips:<br>n&gt;如果是团队多人协作开发，每个成员安装有不同版本 cocoapods gem，以至于在 pod install 的时候会安装不同版本的 cocoapods。为了解决这个问题，使团队成员拥有相同版本的 cocoapods，我们可以用 <a href="https://guides.cocoapods.org/using/a-gemfile.html" target="_blank" rel="noopener">Gemfile</a>，具体步骤是</p>
-</blockquote>
-<div class="note info no-icon"><p>1、<code>gem install bundler</code></p>
+<div class="note info no-icon"><p>Tips:<br>n&gt;如果是团队多人协作开发，每个成员安装有不同版本 cocoapods gem，以至于在 pod install 的时候会安装不同版本的 cocoapods。为了解决这个问题，使团队成员拥有相同版本的 cocoapods，我们可以用 <a href="https://guides.cocoapods.org/using/a-gemfile.html" target="_blank" rel="noopener">Gemfile</a>，具体步骤是</p>
+<p>1、<code>gem install bundler</code></p>
 <p>2、<code>cd Your Project</code></p>
 <p>3、<code>bundle init</code></p>
 <p>4、<code>vim Gemfile</code> and add </p>
