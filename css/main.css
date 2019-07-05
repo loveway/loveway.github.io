@@ -1545,9 +1545,9 @@ pre .javascript .function {
 }
 #rewardButton span {
   display: inline-block;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   color: #fff;
   font-weight: 400;
   font-style: normal;
@@ -1897,7 +1897,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #deff65;
+  background: #0811cc;
 }
 .links-of-blogroll {
   font-size: 13px;
