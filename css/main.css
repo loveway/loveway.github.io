@@ -1557,6 +1557,11 @@ pre .javascript .function {
   font-family: "Microsoft Yahei";
   background: #f44336;
 }
+#rewardTitle span {
+  color: #000;
+  font-size: 14px;
+  font-family: "Microsoft Yahei";
+}
 #rewardButton span:hover {
   background: #f7877f;
 }
@@ -1897,7 +1902,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0811cc;
+  background: #715d3d;
 }
 .links-of-blogroll {
   font-size: 13px;
