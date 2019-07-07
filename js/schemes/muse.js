@@ -1,3 +1,1 @@
-// build time:Sun Jul 07 2019 17:26:49 GMT+0800 (GMT+08:00)
-$(document).ready(function(){function t(){var t=$("#footer").attr("position")?$(".container").height()+$("#footer").outerHeight(true):$(".container").height();if(t<window.innerHeight)$("#footer").css({position:"fixed",bottom:0,left:0,right:0}).attr("position","fixed");else $("#footer").removeAttr("style position")}t();$(window).on("resize scroll",t)});
-//rebuild by neat 
+$(document).ready(function(){function o(){($("#footer").attr("position")?$(".container").height()+$("#footer").outerHeight(!0):$(".container").height())<window.innerHeight?$("#footer").css({position:"fixed",bottom:0,left:0,right:0}).attr("position","fixed"):$("#footer").removeAttr("style position")}o(),$(window).on("resize scroll",o)});
